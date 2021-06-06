@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ComodoForm extends StatelessWidget {
-  final tituloController = TextEditingController();
-  final descricaoController = TextEditingController();
-     
+class ComodoForm extends StatefulWidget {
   final void Function(String, String) onSubmit;
   ComodoForm(this.onSubmit);
+
+  @override
+  _ComodoFormState createState() => _ComodoFormState();
+}
+
+class _ComodoFormState extends State<ComodoForm> {
+  final tituloController = TextEditingController();
+
+  final descricaoController = TextEditingController();
 
   _submitForm(){
     final titulo = tituloController.text;
@@ -16,9 +22,8 @@ class ComodoForm extends StatelessWidget {
       //Caso o titulo esteja vazio
       
     }
-    onSubmit(titulo,descricao);
+    widget.onSubmit(titulo,descricao);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +36,14 @@ class ComodoForm extends StatelessWidget {
                   children: <Widget>[
                     TextField(
                       controller: tituloController,
-                      onSubmitted: (_)=>onSubmit,
+                      onSubmitted: (_)=>widget.onSubmit,
                       decoration: InputDecoration(
                         labelText:'Título'
                       ),
                     ),
                     TextField(
                       controller: descricaoController,
-                      onSubmitted: (_)=>onSubmit,
+                      onSubmitted: (_)=>widget.onSubmit,
                       decoration: InputDecoration(
                         labelText:'Descrição'
                       )

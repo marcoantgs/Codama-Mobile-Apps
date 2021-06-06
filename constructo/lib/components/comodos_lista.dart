@@ -11,7 +11,7 @@ class ComodoLista extends StatelessWidget {
   Widget build(BuildContext context) {
     return   Center(
             child: Container(
-              height: 300,
+              height: 600,
               child: ListView.builder(
                 itemCount: comodos.length,
                 itemBuilder: (ctx, index){

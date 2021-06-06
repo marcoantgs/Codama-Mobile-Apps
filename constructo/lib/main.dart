@@ -1,6 +1,12 @@
-import 'package:flutter/material.dart';
-import 'components/comodo_user.dart';
 
+
+import 'dart:math';
+
+import 'package:constructo/components/comodo_form.dart';
+import 'package:flutter/material.dart';
+import 'components/comodos_lista.dart';
+import 'components/comodo_form.dart';
+import 'models/comodo.dart';
 
 main() => runApp(ExpensesApp());
 
@@ -21,21 +27,85 @@ class ExpensesApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  
+class MyHomePage extends StatefulWidget {
 
-  /*
-  _adicionarComodo(String titulo, String descricao){
-    final novoComodo = Comodo(
-      id:Random().nextDouble().toString(),
-      titulo: titulo,
-      descricao: descricao
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  final _listaComodos = [
+      Comodo(
+        id:'t1',
+        titulo: 'quarto Arthur',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.400
+      ),
+      Comodo(
+        id:'t2',
+        titulo: 'quarto novo',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.200
+      ),
+      Comodo(
+        id:'t1',
+        titulo: 'quarto Arthur',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.400
+      ),
+      Comodo(
+        id:'t2',
+        titulo: 'quarto novo',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.200
+      ),Comodo(
+        id:'t1',
+        titulo: 'quarto Arthur',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.400
+      ),
+      Comodo(
+        id:'t2',
+        titulo: 'quarto novo',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.200
+      ),Comodo(
+        id:'t1',
+        titulo: 'quarto Arthur',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.400
+      ),
+      Comodo(
+        id:'t2',
+        titulo: 'quarto novo',
+        descricao: 'quarto novo, reformando parede',
+        valorTotal: 25.200
+      ),
+      
+  ];
+  _abrirModalForm( BuildContext context){
+    showModalBottomSheet(
+      context: context,
+      builder: (_){
+        return ComodoForm(_addComodo);//Adicionando transação
+      }
     );
-    setState((){
-
-    })
   }
-  */
+
+   _addComodo(String titulo, String descricao){
+    final novoComodo = Comodo(
+      id: Random().nextDouble().toString(),
+      titulo: titulo,
+      descricao: descricao,
+      valorTotal: 0,
+
+    );
+    setState(() {
+          _listaComodos.add(novoComodo);
+          //Adicionando na lista e mudando o visual 
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +134,17 @@ class MyHomePage extends StatelessWidget {
               ),
                  
             ),
-            ComodosUser()
-           
+            ComodoLista(_listaComodos),
+
           ],
         ),
+        
       ),
+      floatingActionButton:FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () =>_abrirModalForm(context),
+      ) ,
+     
     );
   }
 }
