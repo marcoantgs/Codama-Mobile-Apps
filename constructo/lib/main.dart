@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:constructo/components/comodo_form.dart';
 import 'package:constructo/utils/Database.dart';
 import 'package:flutter/material.dart';
-import 'components/comodos_lista.dart';
 import 'components/comodo_form.dart';
 import 'models/comodo.dart';
 
@@ -38,14 +37,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   Map<String,String> novoComodo = {};
-
-  Future _Comodofuture;
+  Future _comodofuture;
   
   @override
     void initState() {
-      // TODO: implement initState
+      
       super.initState();
-      _Comodofuture = getComodo();
+      _comodofuture = getComodo();
     }
 
     getComodo() async {
@@ -135,7 +133,39 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Center(child: Text('Constructor')),
       ),
-      body: 
+      body: FutureBuilder(
+        future: _comodofuture,
+        builder: (_, comodoData){
+          switch(comodoData.connectionState){
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+            case ConnectionState.active:
+            case ConnectionState.done:
+              if(!novoComodo.containsKey('id')){
+                novoComodo = Map<String, String>.from(comodoData.data);
+              }
+
+              return Column(children: <Widget>[
+                Text(
+                  
+                novoComodo['titulo']
+                ),
+                Text(
+                
+                novoComodo['descricao']
+                ),
+                
+              ],);
+
+          }
+          return Container();
+        },
+      ),
+      floatingActionButton:FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () =>_abrirModalForm(context),
+      ) ,
+
        /*SingleChildScrollView(
         child: Column(
           children: <Widget>[

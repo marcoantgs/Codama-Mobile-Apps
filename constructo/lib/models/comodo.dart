@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 Comodo userFromJson(String str) => Comodo.fromJson(json.decode(str));
+
 String userToJson(Comodo data) =>json.encode(data.toJson());
 
 class Comodo{
