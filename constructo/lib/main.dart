@@ -3,10 +3,12 @@
 import 'dart:math';
 
 import 'package:constructo/components/comodo_form.dart';
+import 'package:constructo/utils/Database.dart';
 import 'package:flutter/material.dart';
 import 'components/comodos_lista.dart';
 import 'components/comodo_form.dart';
 import 'models/comodo.dart';
+
 
 main() => runApp(ExpensesApp());
 
@@ -34,6 +36,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  Map<String,String> novoComodo = {};
+
+  Future _Comodofuture;
+  
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      _Comodofuture = getComodo();
+    }
+
+    getComodo() async {
+      final _comodoData = await DBProvider.db.getComodo();
+      return _comodoData;
+    }
 
   final _listaComodos = [
       Comodo(
@@ -105,6 +123,10 @@ class _MyHomePageState extends State<MyHomePage> {
           _listaComodos.add(novoComodo);
           //Adicionando na lista e mudando o visual 
     });
+    var novoDBComodo = Comodo(id: Random().nextDouble().toString(), titulo: titulo, descricao: descricao);
+    DBProvider.db.novoComodo(novoDBComodo);
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -113,7 +135,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Center(child: Text('Constructor')),
       ),
-      body: SingleChildScrollView(
+      body: 
+       /*SingleChildScrollView(
         child: Column(
           children: <Widget>[
 
@@ -134,8 +157,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
                  
             ),
-            ComodoLista(_listaComodos),
-
+            //ComodoLista(_listaComodos),
+        
           ],
         ),
         
@@ -144,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
         onPressed: () =>_abrirModalForm(context),
       ) ,
-     
+     */
     );
   }
 }
