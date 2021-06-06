@@ -3,9 +3,10 @@
 import 'dart:math';
 
 import 'package:constructo/components/comodo_form.dart';
-import 'package:constructo/utils/Database.dart';
+import 'package:constructo/utils/DatabaseComodo.dart';
 import 'package:flutter/material.dart';
 import 'components/comodo_form.dart';
+import 'components/comodos_lista.dart';
 import 'models/comodo.dart';
 
 
@@ -36,69 +37,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  Map<String,String> novoComodo = {};
-  Future _comodofuture;
+ Future<List<Comodo>> listaComodos = DataBaseComodo().getComodo();
   
-  @override
-    void initState() {
-      
-      super.initState();
-      _comodofuture = getComodo();
-    }
-
-    getComodo() async {
-      final _comodoData = await DBProvider.db.getComodo();
-      return _comodoData;
-    }
-
+  _LerLista(){
+    
+  }
+  
   final _listaComodos = [
-      Comodo(
-        id:'t1',
-        titulo: 'quarto Arthur',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.400
-      ),
-      Comodo(
-        id:'t2',
-        titulo: 'quarto novo',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.200
-      ),
-      Comodo(
-        id:'t1',
-        titulo: 'quarto Arthur',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.400
-      ),
-      Comodo(
-        id:'t2',
-        titulo: 'quarto novo',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.200
-      ),Comodo(
-        id:'t1',
-        titulo: 'quarto Arthur',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.400
-      ),
-      Comodo(
-        id:'t2',
-        titulo: 'quarto novo',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.200
-      ),Comodo(
-        id:'t1',
-        titulo: 'quarto Arthur',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.400
-      ),
-      Comodo(
-        id:'t2',
-        titulo: 'quarto novo',
-        descricao: 'quarto novo, reformando parede',
-        valorTotal: 25.200
-      ),
-      
+     
   ];
   _abrirModalForm( BuildContext context){
     showModalBottomSheet(
@@ -111,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
    _addComodo(String titulo, String descricao){
     final novoComodo = Comodo(
-      id: Random().nextDouble().toString(),
+      id: Random().nextInt(500),
       titulo: titulo,
       descricao: descricao,
       valorTotal: 0,
@@ -119,11 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     setState(() {
           _listaComodos.add(novoComodo);
+          DataBaseComodo().Criar(novoComodo);
           //Adicionando na lista e mudando o visual 
     });
-    var novoDBComodo = Comodo(id: Random().nextDouble().toString(), titulo: titulo, descricao: descricao);
-    DBProvider.db.novoComodo(novoDBComodo);
-
     Navigator.of(context).pop();
   }
 
@@ -133,40 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Center(child: Text('Constructor')),
       ),
-      body: FutureBuilder(
-        future: _comodofuture,
-        builder: (_, comodoData){
-          switch(comodoData.connectionState){
-            case ConnectionState.none:
-            case ConnectionState.waiting:
-            case ConnectionState.active:
-            case ConnectionState.done:
-              if(!novoComodo.containsKey('id')){
-                novoComodo = Map<String, String>.from(comodoData.data);
-              }
-
-              return Column(children: <Widget>[
-                Text(
-                  
-                novoComodo['titulo']
-                ),
-                Text(
-                
-                novoComodo['descricao']
-                ),
-                
-              ],);
-
-          }
-          return Container();
-        },
-      ),
-      floatingActionButton:FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () =>_abrirModalForm(context),
-      ) ,
-
-       /*SingleChildScrollView(
+      body:  SingleChildScrollView(
         child: Column(
           children: <Widget>[
 
@@ -185,9 +96,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   )
                 
               ),
+              
                  
             ),
-            //ComodoLista(_listaComodos),
+            
+            ComodoLista(_listaComodos),
+
         
           ],
         ),
@@ -197,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
         onPressed: () =>_abrirModalForm(context),
       ) ,
-     */
+     
     );
   }
 }
