@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   int gerarIndex() {
-    if (_listaComodos.length > 0) {
+    if (_listaComodos.isNotEmpty) {
       return _listaComodos.last.id + 1;
     }
     return 1;
@@ -61,12 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
         context: context,
         builder: (_) {
-          return ComodoForm(_addComodo); //Adicionando comodo 
+          return ComodoForm(_addComodo); //Adicionando comodo
         });
   }
 
-  _addComodo(String titulo, String descricao, Text tipoComodo ) {
-    final novoComodo = Comodo(gerarIndex(), titulo, descricao, 0, tipoComodo.data);
+  _addComodo(String titulo, String descricao, Text tipoComodo) {
+    final novoComodo =
+        Comodo(gerarIndex(), titulo, descricao, 0, tipoComodo.data);
 
     setState(() {
       _listaComodos.add(novoComodo);
@@ -79,13 +80,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: SingleChildScrollView(
-      
         child: Column(
-          
           children: <Widget>[
-            //Image(image: '../assets/logo.png'),
             Container(
               color: Color.fromARGB(255, 72, 34, 16),
               height: 130,
@@ -99,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               )),
             ),
+            //Image.asset('assets/images/logo2.png'),
             ComodoLista(_listaComodos),
           ],
         ),
