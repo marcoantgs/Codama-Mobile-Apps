@@ -61,12 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
     showModalBottomSheet(
         context: context,
         builder: (_) {
-          return ComodoForm(_addComodo); //Adicionando transação
+          return ComodoForm(_addComodo); //Adicionando comodo 
         });
   }
 
-  _addComodo(String titulo, String descricao) {
-    final novoComodo = Comodo(gerarIndex(), titulo, descricao, 0, "");
+  _addComodo(String titulo, String descricao, Text tipoComodo ) {
+    final novoComodo = Comodo(gerarIndex(), titulo, descricao, 0, tipoComodo.data);
 
     setState(() {
       _listaComodos.add(novoComodo);
@@ -79,9 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: SingleChildScrollView(
+      
         child: Column(
+          
           children: <Widget>[
+            //Image(image: '../assets/logo.png'),
             Container(
               color: Color.fromARGB(255, 72, 34, 16),
               height: 130,

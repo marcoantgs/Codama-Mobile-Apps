@@ -55,6 +55,16 @@ class ComodoLista extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25, bottom: 12),
+                      child: Text(
+                        co.tipoComodo,
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 10,
+                        ),
+                      ),
+                    ),
                   ],
                 )
               ],

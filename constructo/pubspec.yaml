@@ -28,6 +28,7 @@ dependencies:
   path: 
 
   flutter_native_splash: ^0.2.8
+  dropdownfield: "1.0.3"
 
 flutter_native_splash:
  color: "#482210"

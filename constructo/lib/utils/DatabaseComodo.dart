@@ -7,7 +7,7 @@ class DataBaseComodo {
   static String createDataBase =
       "CREATE TABLE comodos(id INTEGER PRIMARY KEY, titulo TEXT, descricao TEXT, valorTotal REAL, tipoComodo TEXT)";
   static String insertDataBase =
-      "INSERT INTO Test(id, titulo, descricao) VALUES(?, ?, ?, ?)";
+      "INSERT INTO Test(id, titulo, descricao, valor, tipoComodo) VALUES(?, ?, ?, ?, ?)";
   static String nomeDataBase = "comodos.db";
   static String nomeTabela = "comodos";
 

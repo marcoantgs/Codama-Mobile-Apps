@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ComodoForm extends StatefulWidget {
-  final void Function(String, String) onSubmit;
+  final void Function(String, String, Text) onSubmit;
   ComodoForm(this.onSubmit);
 
   @override
@@ -10,19 +10,37 @@ class ComodoForm extends StatefulWidget {
 
 class _ComodoFormState extends State<ComodoForm> {
   final tituloController = TextEditingController();
-
   final descricaoController = TextEditingController();
+  String tipoComodo = "";
+
+ String dropdownValue = 'One';
+
+  
+  /*
+  List <DropdownMenuItem<String>> listaDropComodos = [];
+
+  void tipoComodos(){
+    listaDropComodos.add(new DropdownMenuItem(child: new Text('Banheiro'), value: 'Banheiro'));
+    listaDropComodos.add(new DropdownMenuItem(child: new Text('Sala'), value: 'Sala'));
+    listaDropComodos.add(new DropdownMenuItem(child: new Text('Quarto'), value: 'Quarto'));
+
+
+  }
+  */
 
   _submitForm() {
     final titulo = tituloController.text;
     final descricao = descricaoController.text;
+    final tipoComodoText = Text(tipoComodo);
+ 
     //Pegando os dois valores
     if (titulo.isEmpty) {
       return;
       //Caso o titulo esteja vazio
 
     }
-    widget.onSubmit(titulo, descricao);
+    widget.onSubmit(titulo, descricao,tipoComodoText);
+
   }
 
   @override
@@ -41,9 +59,55 @@ class _ComodoFormState extends State<ComodoForm> {
             TextField(
                 controller: descricaoController,
                 onSubmitted: (_) => widget.onSubmit,
-                decoration: InputDecoration(labelText: 'Descrição')),
+                decoration: InputDecoration(labelText: 'Descrição')
+            ),
+
+            DropdownButton<String>(
+                value: dropdownValue,
+                icon: const Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: const TextStyle(color: Colors.deepPurple),
+                underline: Container(
+                  height: 2,
+                  color: Colors.deepPurpleAccent,
+                ),
+                onChanged: (String newValue) {
+                  setState(() {
+                     tipoComodo = newValue;
+                  });
+                },
+                items: <String>['One', 'Two', 'Free', 'Four']
+                    .map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+
+                  );
+              }).toList()),
+              
+
+              FlatButton(child: Text('Novo comômdo'), onPressed: _submitForm)
+
+            /*
+            new DropdownButton<String>(
+              items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                return new DropdownMenuItem<String>(
+                  value: value,
+                  child: new Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  dropdownValue = newValue!;
+                });
+              },
+            ),
+            */
+            
+
             // ignore: deprecated_member_use
-            FlatButton(child: Text('Novo comômdo'), onPressed: _submitForm)
+            
           ],
         ),
       ),
