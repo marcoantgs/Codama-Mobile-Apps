@@ -1,21 +1,19 @@
+class Comodo {
+  int id;
+  String titulo;
+  String descricao;
+  double valorTotal;
+  String tipoComodo;
 
-
-class Comodo{
-  final int id;
-  final String titulo;
-  final String descricao;
-  final double valorTotal;
-  final String tipoComodo;
-
-  Comodo({
+  Comodo(
     this.id,
     this.titulo,
     this.descricao,
     this.valorTotal,
     this.tipoComodo,
-  });
+  );
 
-  Map <String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'id': id,
       'titulo': titulo,
@@ -25,4 +23,11 @@ class Comodo{
     };
   }
 
+  Comodo.fromMap(Map<String, dynamic> map) {
+    id = map['id'];
+    titulo = map['titulo'];
+    descricao = map['descricao'];
+    valorTotal = map['valorTotal'];
+    tipoComodo = map['tipoComodo'];
+  }
 }
