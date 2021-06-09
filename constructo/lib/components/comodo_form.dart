@@ -11,21 +11,7 @@ class ComodoForm extends StatefulWidget {
 class _ComodoFormState extends State<ComodoForm> {
   final tituloController = TextEditingController();
   final descricaoController = TextEditingController();
-  String tipoComodo = "";
-
-  String dropdownValue = 'Área de Serviços';
-
-  /*
-  List <DropdownMenuItem<String>> listaDropComodos = [];
-
-  void tipoComodos(){
-    listaDropComodos.add(new DropdownMenuItem(child: new Text('Banheiro'), value: 'Banheiro'));
-    listaDropComodos.add(new DropdownMenuItem(child: new Text('Sala'), value: 'Sala'));
-    listaDropComodos.add(new DropdownMenuItem(child: new Text('Quarto'), value: 'Quarto'));
-
-
-  }
-  */
+  String tipoComodo = 'Área de Serviços';
 
   _submitForm() {
     final titulo = tituloController.text;
@@ -58,9 +44,8 @@ class _ComodoFormState extends State<ComodoForm> {
                 controller: descricaoController,
                 onSubmitted: (_) => widget.onSubmit,
                 decoration: InputDecoration(labelText: 'Descrição')),
-
             DropdownButton<String>(
-                value: dropdownValue,
+                value: tipoComodo,
                 icon: const Icon(Icons.arrow_downward),
                 iconSize: 24,
                 elevation: 16,
@@ -88,26 +73,7 @@ class _ComodoFormState extends State<ComodoForm> {
                     child: Text(value),
                   );
                 }).toList()),
-
             FlatButton(child: Text('Novo cômodo'), onPressed: _submitForm)
-
-            /*
-            new DropdownButton<String>(
-              items: <String>['A', 'B', 'C', 'D'].map((String value) {
-                return new DropdownMenuItem<String>(
-                  value: value,
-                  child: new Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  dropdownValue = newValue!;
-                });
-              },
-            ),
-            */
-
-            // ignore: deprecated_member_use
           ],
         ),
       ),

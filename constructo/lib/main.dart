@@ -124,8 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
             title: Text('Home'),
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined),
-              title: Text('Adicionar cômodo')),
+              icon: Icon(Icons.add_box_outlined), title: Text('Cômodo')),
           BottomNavigationBarItem(
               icon: Icon(Icons.info_outline), title: Text('Sobre')),
         ],
