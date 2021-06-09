@@ -77,6 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).pop();
   }
 
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
               width: double.infinity,
               child: Center(
                   child: Text(
-                "Seja bem-vindo(a)!!!",
+                "Seja bem-vindo(a)!",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -103,7 +105,35 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Color.fromARGB(255, 72, 34, 16),
+        foregroundColor: Colors.white,
         onPressed: () => _abrirModalForm(context),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color.fromARGB(255, 72, 34, 16),
+        iconSize: 40,
+        selectedFontSize: 20,
+        unselectedFontSize: 15,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined),
+              title: Text('Adicionar cômodo')),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline), title: Text('Sobre')),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }

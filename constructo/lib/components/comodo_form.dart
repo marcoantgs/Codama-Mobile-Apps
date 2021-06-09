@@ -13,9 +13,8 @@ class _ComodoFormState extends State<ComodoForm> {
   final descricaoController = TextEditingController();
   String tipoComodo = "";
 
- String dropdownValue = 'One';
+  String dropdownValue = 'Área de Serviços';
 
-  
   /*
   List <DropdownMenuItem<String>> listaDropComodos = [];
 
@@ -32,15 +31,14 @@ class _ComodoFormState extends State<ComodoForm> {
     final titulo = tituloController.text;
     final descricao = descricaoController.text;
     final tipoComodoText = Text(tipoComodo);
- 
+
     //Pegando os dois valores
     if (titulo.isEmpty) {
       return;
       //Caso o titulo esteja vazio
 
     }
-    widget.onSubmit(titulo, descricao,tipoComodoText);
-
+    widget.onSubmit(titulo, descricao, tipoComodoText);
   }
 
   @override
@@ -59,35 +57,39 @@ class _ComodoFormState extends State<ComodoForm> {
             TextField(
                 controller: descricaoController,
                 onSubmitted: (_) => widget.onSubmit,
-                decoration: InputDecoration(labelText: 'Descrição')
-            ),
+                decoration: InputDecoration(labelText: 'Descrição')),
 
             DropdownButton<String>(
                 value: dropdownValue,
                 icon: const Icon(Icons.arrow_downward),
                 iconSize: 24,
                 elevation: 16,
-                style: const TextStyle(color: Colors.deepPurple),
+                style: const TextStyle(color: Color.fromARGB(255, 72, 34, 16)),
                 underline: Container(
                   height: 2,
-                  color: Colors.deepPurpleAccent,
+                  color: Color.fromARGB(255, 72, 34, 16),
                 ),
                 onChanged: (String newValue) {
                   setState(() {
-                     tipoComodo = newValue;
+                    tipoComodo = newValue;
                   });
                 },
-                items: <String>['One', 'Two', 'Free', 'Four']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: <String>[
+                  'Área de Serviços',
+                  'Banheiro',
+                  'Cozinha',
+                  'Escritório',
+                  'Oficina',
+                  'Quarto',
+                  'Sala'
+                ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
-
                   );
-              }).toList()),
-              
+                }).toList()),
 
-              FlatButton(child: Text('Novo comômdo'), onPressed: _submitForm)
+            FlatButton(child: Text('Novo cômodo'), onPressed: _submitForm)
 
             /*
             new DropdownButton<String>(
@@ -104,10 +106,8 @@ class _ComodoFormState extends State<ComodoForm> {
               },
             ),
             */
-            
 
             // ignore: deprecated_member_use
-            
           ],
         ),
       ),
