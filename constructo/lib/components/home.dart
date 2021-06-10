@@ -1,10 +1,9 @@
-import 'package:constructo/components/comodo_form.dart';
+import 'package:constructo/components/comodo_cadastro.dart';
+import 'package:constructo/components/comodo_lista.dart';
 import 'package:constructo/components/sobre.dart';
+import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/DatabaseComodo.dart';
 import 'package:flutter/material.dart';
-import 'comodo_form.dart';
-import 'comodo_lista.dart';
-import '../models/comodo.dart';
 
 class HomeConstructo extends StatefulWidget {
   @override
@@ -34,34 +33,7 @@ class _HomeConstructo extends State<HomeConstructo> {
     });
   }
 
-  int gerarIndex() {
-    if (_listaComodos.isNotEmpty) {
-      return _listaComodos.last.id + 1;
-    }
-    return 1;
-  }
-
   final List<Comodo> _listaComodos = [];
-
-  _abrirModalForm(BuildContext context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (_) {
-          return ComodoForm(_addComodo); //Adicionando comodo
-        });
-  }
-
-  _addComodo(String titulo, String descricao, Text tipoComodo) {
-    final novoComodo =
-        Comodo(gerarIndex(), titulo, descricao, 0, tipoComodo.data);
-
-    setState(() {
-      _listaComodos.add(novoComodo);
-      DataBaseComodo().criar(novoComodo);
-      //Adicionando na lista e mudando o visual
-    });
-    Navigator.of(context).pop();
-  }
 
   _trocaDeTela(int index) {
     if (index == 0) {
@@ -72,7 +44,7 @@ class _HomeConstructo extends State<HomeConstructo> {
     } else if (index == 1) {
       setState(() {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeConstructo()));
+            context, MaterialPageRoute(builder: (context) => CadastroComodo()));
       });
     } else if (index == 2) {
       setState(() {
@@ -105,12 +77,6 @@ class _HomeConstructo extends State<HomeConstructo> {
             ComodoLista(_listaComodos),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 72, 34, 16),
-        foregroundColor: Colors.white,
-        onPressed: () => _abrirModalForm(context),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

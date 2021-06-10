@@ -1,30 +1,57 @@
+import 'package:constructo/components/home.dart';
+import 'package:constructo/models/comodo.dart';
+import 'package:constructo/utils/DatabaseComodo.dart';
 import 'package:flutter/material.dart';
 
-class ComodoForm extends StatefulWidget {
-  final void Function(String, String, Text) onSubmit;
-  ComodoForm(this.onSubmit);
-
+class CadastroComodo extends StatefulWidget {
   @override
-  _ComodoFormState createState() => _ComodoFormState();
+  _CadastroComodoState createState() => _CadastroComodoState();
 }
 
-class _ComodoFormState extends State<ComodoForm> {
+class _CadastroComodoState extends State<CadastroComodo> {
+  List<Comodo> comodos = List<Comodo>();
+
   final tituloController = TextEditingController();
   final descricaoController = TextEditingController();
   String tipoComodo = 'Área de Serviços';
 
-  _submitForm() {
+  @override
+  void initState() {
+    super.initState();
+
+    DataBaseComodo().getComodo().then((lista) {
+      comodos = lista;
+    });
+  }
+
+  int gerarIndex() {
+    if (comodos.isNotEmpty) {
+      return comodos.last.id + 1;
+    }
+    return 1;
+  }
+
+  _btCadastrar() {
+    //Pegando os valores
     final titulo = tituloController.text;
     final descricao = descricaoController.text;
     final tipoComodoText = Text(tipoComodo);
 
-    //Pegando os dois valores
+    //Caso o titulo esteja vazio
     if (titulo.isEmpty) {
       return;
-      //Caso o titulo esteja vazio
-
     }
-    widget.onSubmit(titulo, descricao, tipoComodoText);
+
+    //Atribuindo valores e cadastrando no banco de dados
+    final novoComodo =
+        Comodo(gerarIndex(), titulo, descricao, 0, tipoComodoText.data);
+    DataBaseComodo().criar(novoComodo);
+
+    //Chamando a outra tela
+    setState(() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomeConstructo()));
+    });
   }
 
   @override
@@ -37,12 +64,10 @@ class _ComodoFormState extends State<ComodoForm> {
           children: <Widget>[
             TextField(
               controller: tituloController,
-              onSubmitted: (_) => widget.onSubmit,
               decoration: InputDecoration(labelText: 'Título'),
             ),
             TextField(
                 controller: descricaoController,
-                onSubmitted: (_) => widget.onSubmit,
                 decoration: InputDecoration(labelText: 'Descrição')),
             DropdownButton<String>(
                 value: tipoComodo,
@@ -73,7 +98,7 @@ class _ComodoFormState extends State<ComodoForm> {
                     child: Text(value),
                   );
                 }).toList()),
-            FlatButton(child: Text('Novo cômodo'), onPressed: _submitForm)
+            FlatButton(child: Text('Novo cômodo'), onPressed: _btCadastrar)
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:constructo/components/comodo_cadastro.dart';
 import 'package:constructo/components/home.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
     } else if (index == 1) {
       setState(() {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeConstructo()));
+            context, MaterialPageRoute(builder: (context) => CadastroComodo()));
       });
     } else if (index == 2) {
       setState(() {
