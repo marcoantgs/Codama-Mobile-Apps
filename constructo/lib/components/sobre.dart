@@ -1,17 +1,5 @@
+import 'package:constructo/components/home.dart';
 import 'package:flutter/material.dart';
-
-class ExpensesApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Sobre(),
-      theme: ThemeData(
-        primarySwatch: Colors.brown,
-        accentColor: Colors.amber,
-      ),
-    );
-  }
-}
 
 class Sobre extends StatefulWidget {
   @override
@@ -19,12 +7,24 @@ class Sobre extends StatefulWidget {
 }
 
 class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
+  _trocaDeTela(int index) {
+    if (index == 0) {
+      setState(() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeConstructo()));
+      });
+    } else if (index == 1) {
+      setState(() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeConstructo()));
+      });
+    } else if (index == 2) {
+      setState(() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Sobre()));
+      });
+    }
   }
-
-  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,6 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromARGB(255, 72, 34, 16),
         iconSize: 40,
@@ -59,18 +58,14 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
         unselectedItemColor: Colors.white,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            title: Text('Home'),
-          ),
+              icon: Icon(Icons.home_outlined), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined), title: Text('Cômodo')),
+              icon: Icon(Icons.add_box_outlined), label: 'Cômodo'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline), title: Text('Sobre')),
+              icon: Icon(Icons.info_outline), label: 'Sobre'),
         ],
         onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          _trocaDeTela(index);
         },
       ),
     );
