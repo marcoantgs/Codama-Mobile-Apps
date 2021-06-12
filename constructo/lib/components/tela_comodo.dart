@@ -1,21 +1,27 @@
 import 'package:constructo/components/comodo_cadastro.dart';
+import 'package:constructo/components/sobre.dart';
 import 'package:flutter/material.dart';
 
-class Sobre extends StatefulWidget {
+class TelaComodo extends StatefulWidget {
   @override
-  _SobreState createState() => _SobreState();
+  _TelaComodoState createState() => _TelaComodoState();
 }
 
-class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
+class _TelaComodoState extends State<TelaComodo> {
   _trocaDeTela(int index) {
     if (index == 0) {
       setState(() {
-        Navigator.popAndPushNamed(context, '/');
+        Navigator.popAndPushNamed(context, '/home');
       });
     } else if (index == 1) {
       setState(() {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => CadastroComodo()));
+      });
+    } else if (index == 2) {
+      setState(() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Sobre()));
       });
     }
   }
@@ -32,7 +38,7 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
               width: double.infinity,
               child: Center(
                   child: Text(
-                "Sobre o aplicativo",
+                "bla bla bla",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,

@@ -1,4 +1,3 @@
-import 'package:constructo/components/home.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/DatabaseComodo.dart';
 import 'package:flutter/material.dart';
@@ -45,13 +44,16 @@ class _CadastroComodoState extends State<CadastroComodo> {
     //Atribuindo valores e cadastrando no banco de dados
     final novoComodo =
         Comodo(gerarIndex(), titulo, descricao, 0, tipoComodoText.data);
-    DataBaseComodo().criar(novoComodo);
+    DataBaseComodo().inserir(novoComodo);
 
     //Chamando a outra tela
     setState(() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomeConstructo()));
+      Navigator.popAndPushNamed(context, '/comodo');
     });
+  }
+
+  _btCancelar() {
+    Navigator.pop(context);
   }
 
   @override
@@ -98,7 +100,8 @@ class _CadastroComodoState extends State<CadastroComodo> {
                     child: Text(value),
                   );
                 }).toList()),
-            FlatButton(child: Text('Novo cômodo'), onPressed: _btCadastrar)
+            FlatButton(child: Text('Novo cômodo'), onPressed: _btCadastrar),
+            FlatButton(child: Text('Cancelar'), onPressed: _btCancelar)
           ],
         ),
       ),

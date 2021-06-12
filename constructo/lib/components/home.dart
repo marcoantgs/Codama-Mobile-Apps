@@ -36,12 +36,7 @@ class _HomeConstructo extends State<HomeConstructo> {
   final List<Comodo> _listaComodos = [];
 
   _trocaDeTela(int index) {
-    if (index == 0) {
-      setState(() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeConstructo()));
-      });
-    } else if (index == 1) {
+    if (index == 1) {
       setState(() {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => CadastroComodo()));
