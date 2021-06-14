@@ -1,11 +1,12 @@
 import 'package:constructo/models/comodo.dart';
+import 'package:constructo/models/gastoComodo.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 
 class DataBaseComodo {
   static String criarTabela =
-      "CREATE TABLE listaGasto(id INTEGER PRIMARY KEY, titulo TEXT, descricao TEXT, valorTotal REAL, tipoComodo TEXT)";
+      "CREATE TABLE listaGasto(id INTEGER PRIMARY KEY, titulo TEXT, descricao TEXT, valor REAL)";
   static String nomeDataBase = "constructoListaGasto.db";
   static String nomeTabela = "listaGasto";
 
@@ -21,12 +22,12 @@ class DataBaseComodo {
   }
 
 //Insere um objeto comodo no banco de dados
-  Future inserir(Comodo novoComodo) async {
+  Future inserir(GastoComodo novoGasto) async {
     try {
       final Database db = await _getdatabase();
       await db.insert(
         nomeTabela,
-        novoComodo.toMap(),
+        novoGasto.toMap(),
       );
     } catch (ex) {
       print(ex);
@@ -35,7 +36,7 @@ class DataBaseComodo {
   }
 
 //Obtem os comodos cadastrados no banco de dados e retorna uma lista com os mesmos
-  Future<List<Comodo>> getComodo() async {
+  Future<List<GastoComodo>> getGasto() async {
     try {
       final Database db = await _getdatabase();
       final List<Map<String, dynamic>> maps = await db.query(nomeTabela);
@@ -43,12 +44,12 @@ class DataBaseComodo {
       return List.generate(
         maps.length,
         (i) {
-          return Comodo.fromMap(maps[i]);
+          return GastoComodo.fromMap(maps[i]);
         },
       );
     } catch (ex) {
       print(ex);
-      return new List<Comodo>();
+      return new List<GastoComodo>();
     }
   }
 

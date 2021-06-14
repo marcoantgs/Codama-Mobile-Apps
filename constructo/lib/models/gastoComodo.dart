@@ -3,14 +3,12 @@ class GastoComodo {
   String titulo;
   double valor;
  
-
   GastoComodo(
     this.id,
     this.titulo,
     this.valor,
 
   );
-
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -19,7 +17,6 @@ class GastoComodo {
 
     };
   }
-
   GastoComodo.fromMap(Map<String, dynamic> map) {
     id = map['id'];
     titulo = map['titulo'];
