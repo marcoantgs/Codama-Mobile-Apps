@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 
-class DataBaseComodo {
+class DataBaseListaGasto {
   static String criarTabela =
       "CREATE TABLE listaGasto(id INTEGER PRIMARY KEY, titulo TEXT, descricao TEXT, valor REAL)";
   static String nomeDataBase = "constructoListaGasto.db";
