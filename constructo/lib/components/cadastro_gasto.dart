@@ -34,7 +34,6 @@ class _CadastroGastoState extends State<CadastroGasto> {
     final titulo = tituloController.text;
     final valor = double.tryParse(valorController.text) ?? 0.0;
 
-
     //Caso o titulo esteja vazio
     if (titulo.isEmpty) {
       return;
@@ -71,7 +70,7 @@ class _CadastroGastoState extends State<CadastroGasto> {
                 controller: valorController,
                 decoration: InputDecoration(labelText: 'valor')
             ),
-            FlatButton(child: Text('Novo cômodo'), onPressed: _btCadastrar),
+            FlatButton(child: Text('Novo Gasto'), onPressed: _btCadastrar),
             FlatButton(child: Text('Cancelar'), onPressed: _btCancelar)
           ],
         ),

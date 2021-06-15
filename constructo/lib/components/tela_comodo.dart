@@ -1,19 +1,43 @@
 import 'package:constructo/components/comodo_cadastro.dart';
+import 'package:constructo/components/comodo_lista.dart';
 import 'package:constructo/components/sobre.dart';
+import 'package:constructo/models/gastoComodo.dart';
+import 'package:constructo/utils/DatabaseListaGasto.dart';
 import 'package:flutter/material.dart';
+
+import 'gastoComodo_lista.dart';
 
 class TelaComodo extends StatefulWidget {
   @override
-  _TelaComodoState createState() => _TelaComodoState();
+  _TelaComodo createState() => _TelaComodo();
 }
 
-class _TelaComodoState extends State<TelaComodo> {
-  _trocaDeTela(int index) {
-    if (index == 0) {
+class _TelaComodo extends State<TelaComodo> {
+  List<GastoComodo> gastos = List<GastoComodo>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    DataBaseListaGasto().getGasto().then((lista) {
       setState(() {
-        Navigator.popAndPushNamed(context, '/home');
+        gastos = lista;
+        for (var i = 0; i < gastos.length; i++) {
+            GastoComodo gastosCadastrados = GastoComodo(
+              gastos[i].id,
+              gastos[i].titulo,
+              gastos[i].valor,
+              );
+          _listaGasto.add(gastosCadastrados);
+        }
       });
-    } else if (index == 1) {
+    });
+  }
+
+  final List<GastoComodo> _listaGasto = [];
+
+  _trocaDeTela(int index) {
+    if (index == 1) {
       setState(() {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => CadastroComodo()));
@@ -38,13 +62,15 @@ class _TelaComodoState extends State<TelaComodo> {
               width: double.infinity,
               child: Center(
                   child: Text(
-                "bla bla bla",
+                "Seja bem-vindo(a)!",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
                 ),
               )),
             ),
+            //Image.asset('assets/images/logo2.png'),
+            GastoComodoLista(_listaGasto ),
           ],
         ),
       ),
