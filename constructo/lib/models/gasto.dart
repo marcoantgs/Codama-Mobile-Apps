@@ -1,26 +1,28 @@
-class GastoComodo {
+class Gasto {
   int id;
   String titulo;
   double valor;
- 
-  GastoComodo(
+  int comodo;
+
+  Gasto(
     this.id,
     this.titulo,
     this.valor,
-
+    this.comodo,
   );
+
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'titulo': titulo,
       'valor': valor,
-
+      'comodo': comodo,
     };
   }
-  GastoComodo.fromMap(Map<String, dynamic> map) {
+
+  Gasto.fromMap(Map<String, dynamic> map) {
     id = map['id'];
     titulo = map['titulo'];
     valor = map['valor'];
-
+    comodo = map['comodo'];
   }
 }

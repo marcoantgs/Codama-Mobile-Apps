@@ -1,6 +1,5 @@
 import 'package:constructo/models/comodo.dart';
 import 'package:flutter/material.dart';
-import '../models/comodo.dart';
 
 class ComodoLista extends StatelessWidget {
   final List<Comodo> comodos;

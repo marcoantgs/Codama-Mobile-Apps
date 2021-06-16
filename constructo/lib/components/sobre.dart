@@ -10,7 +10,7 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
   _trocaDeTela(int index) {
     if (index == 0) {
       setState(() {
-        Navigator.popAndPushNamed(context, '/');
+        Navigator.popAndPushNamed(context, '/home');
       });
     } else if (index == 1) {
       setState(() {

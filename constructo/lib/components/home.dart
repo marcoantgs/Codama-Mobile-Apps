@@ -2,7 +2,7 @@ import 'package:constructo/components/comodo_cadastro.dart';
 import 'package:constructo/components/comodo_lista.dart';
 import 'package:constructo/components/sobre.dart';
 import 'package:constructo/models/comodo.dart';
-import 'package:constructo/utils/DatabaseComodo.dart';
+import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
 
 class HomeConstructo extends StatefulWidget {
@@ -17,7 +17,7 @@ class _HomeConstructo extends State<HomeConstructo> {
   void initState() {
     super.initState();
 
-    DataBaseComodo().getComodo().then((lista) {
+    OperacoesComodo().getComodos().then((lista) {
       setState(() {
         comodos = lista;
         for (var i = 0; i < comodos.length; i++) {

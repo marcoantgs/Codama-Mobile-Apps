@@ -1,53 +1,70 @@
 import 'package:constructo/components/comodo_cadastro.dart';
-import 'package:constructo/components/comodo_lista.dart';
-import 'package:constructo/components/sobre.dart';
-import 'package:constructo/models/gastoComodo.dart';
-import 'package:constructo/utils/DatabaseListaGasto.dart';
+import 'package:constructo/components/gasto_cadastro.dart';
+import 'package:constructo/components/gasto_lista.dart';
+import 'package:constructo/models/comodo.dart';
+import 'package:constructo/models/gasto.dart';
+import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:flutter/material.dart';
-
-import 'gastoComodo_lista.dart';
 
 class TelaComodo extends StatefulWidget {
   @override
   _TelaComodo createState() => _TelaComodo();
+
+  final Comodo comodo;
+
+  TelaComodo(this.comodo);
 }
 
 class _TelaComodo extends State<TelaComodo> {
-  List<GastoComodo> gastos = List<GastoComodo>();
+  List<Gasto> gastos = List<Gasto>();
 
   @override
   void initState() {
     super.initState();
 
-    DataBaseListaGasto().getGasto().then((lista) {
+    OperacoesGasto().getGastos(widget.comodo).then((lista) {
       setState(() {
         gastos = lista;
+
         for (var i = 0; i < gastos.length; i++) {
-            GastoComodo gastosCadastrados = GastoComodo(
-              gastos[i].id,
-              gastos[i].titulo,
-              gastos[i].valor,
-              );
+          Gasto gastosCadastrados = Gasto(
+            gastos[i].id,
+            gastos[i].titulo,
+            gastos[i].valor,
+            gastos[i].comodo,
+          );
           _listaGasto.add(gastosCadastrados);
         }
       });
     });
   }
 
-  final List<GastoComodo> _listaGasto = [];
+  final List<Gasto> _listaGasto = [];
 
   _trocaDeTela(int index) {
-    if (index == 1) {
+    if (index == 0) {
+      setState(() {
+        Navigator.popAndPushNamed(context, '/home');
+      });
+    } else if (index == 1) {
       setState(() {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => CadastroComodo()));
       });
     } else if (index == 2) {
       setState(() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Sobre()));
+        Navigator.popAndPushNamed(context, '/sobre');
       });
     }
+  }
+
+  _telaCadastroGasto() {
+    setState(() {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CadastroGasto(comodo: widget.comodo)));
+    });
   }
 
   @override
@@ -62,7 +79,7 @@ class _TelaComodo extends State<TelaComodo> {
               width: double.infinity,
               child: Center(
                   child: Text(
-                "Seja bem-vindo(a)!",
+                widget.comodo.titulo,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -70,9 +87,13 @@ class _TelaComodo extends State<TelaComodo> {
               )),
             ),
             //Image.asset('assets/images/logo2.png'),
-            GastoComodoLista(_listaGasto ),
+            GastoComodoLista(_listaGasto),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () => _telaCadastroGasto(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,

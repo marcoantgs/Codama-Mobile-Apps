@@ -1,5 +1,5 @@
 import 'package:constructo/models/comodo.dart';
-import 'package:constructo/utils/DatabaseComodo.dart';
+import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
 
 class CadastroComodo extends StatefulWidget {
@@ -12,13 +12,13 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
   final tituloController = TextEditingController();
   final descricaoController = TextEditingController();
-  String tipoComodo = 'Área de Serviços';
+  String valorTipoComodo = 'Selecione';
 
   @override
   void initState() {
     super.initState();
 
-    DataBaseComodo().getComodo().then((lista) {
+    OperacoesComodo().getComodos().then((lista) {
       comodos = lista;
     });
   }
@@ -32,23 +32,29 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
   _btCadastrar() {
     //Pegando os valores
+    final id = gerarIndex();
     final titulo = tituloController.text;
     final descricao = descricaoController.text;
-    final tipoComodoText = Text(tipoComodo);
+    final tipoComodo = Text(valorTipoComodo).data;
+    final valorTotal = 0.0;
 
     //Caso o titulo esteja vazio
     if (titulo.isEmpty) {
       return;
+    } else
+    //Caso não tenha selecioando o tipo
+    if (tipoComodo.compareTo('Selecione') == 0) {
+      return;
     }
 
     //Atribuindo valores e cadastrando no banco de dados
-    final novoComodo =
-        Comodo(gerarIndex(), titulo, descricao, 0, tipoComodoText.data);
-    DataBaseComodo().inserir(novoComodo);
+    final novoComodo = Comodo(id, titulo, descricao, valorTotal, tipoComodo);
+
+    OperacoesComodo().inserir(novoComodo);
 
     //Chamando a outra tela
     setState(() {
-      Navigator.popAndPushNamed(context, '/comodo');
+      Navigator.popAndPushNamed(context, '/comodo', arguments: novoComodo);
     });
   }
 
@@ -72,7 +78,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
                 controller: descricaoController,
                 decoration: InputDecoration(labelText: 'Descrição')),
             DropdownButton<String>(
-                value: tipoComodo,
+                value: valorTipoComodo,
                 icon: const Icon(Icons.arrow_downward),
                 iconSize: 24,
                 elevation: 16,
@@ -83,10 +89,11 @@ class _CadastroComodoState extends State<CadastroComodo> {
                 ),
                 onChanged: (String newValue) {
                   setState(() {
-                    tipoComodo = newValue;
+                    valorTipoComodo = newValue;
                   });
                 },
                 items: <String>[
+                  'Selecione',
                   'Área de Serviços',
                   'Banheiro',
                   'Cozinha',

@@ -1,9 +1,8 @@
-import 'package:constructo/models/gastoComodo.dart';
+import 'package:constructo/models/gasto.dart';
 import 'package:flutter/material.dart';
-import '../models/comodo.dart';
 
 class GastoComodoLista extends StatelessWidget {
-  final List<GastoComodo> gastos;
+  final List<Gasto> gastos;
   GastoComodoLista(this.gastos);
 
   @override
@@ -45,7 +44,6 @@ class GastoComodoLista extends StatelessWidget {
                         ),
                       ),
                     ),
-    
                   ],
                 )
               ],
