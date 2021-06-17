@@ -39,6 +39,7 @@ class _TelaComodo extends State<TelaComodo> {
     });
   }
 
+
   final List<Gasto> _listaGasto = [];
 
   _trocaDeTela(int index) {
@@ -66,7 +67,26 @@ class _TelaComodo extends State<TelaComodo> {
               builder: (context) => CadastroGasto(comodo: widget.comodo)));
     });
   }
+  /*
 
+  _creatPdf(contex, name, lastName, year) async {
+    final pdfLib.Document pdf = pdfLib.Document(deflate: zlib.encode);
+
+    pdf.addPage(pdfLib.MultiPage(
+        build: (context) => [
+              pdfLib.Table.fromTextArray(data: <List<String>>[
+                <String>['Nome', 'Sobrenome', 'Idade'],
+                [name, lastName, year]
+              ])
+            ]));
+
+    final String dir = (await getApplicationDocumentsDirectory()).path;
+
+    final String path = '$dir/pdfExample.pdf';
+    final File file = File(path);
+    file.writeAsBytesSync(pdf.save());
+  }
+   /*
   @override
   Widget build(BuildContext context) {
     return Scaffold(
