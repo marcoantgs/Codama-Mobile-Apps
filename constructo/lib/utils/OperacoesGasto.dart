@@ -49,8 +49,8 @@ class OperacoesGasto {
   }
 
 //Deleta um objeto gasto do banco de dados
-  Future deletar(Gasto deletarGasto) async {
+  Future deletar(int deletarGasto) async {
     final Database db = await dbProvider.getdatabase();
-    await db.delete(nomeTabela, where: "id = ?", whereArgs: [deletarGasto.id]);
+    await db.delete(nomeTabela, where: "comodo = ?", whereArgs: [deletarGasto]);
   }
 }
