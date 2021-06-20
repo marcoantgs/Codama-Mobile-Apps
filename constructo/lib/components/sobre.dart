@@ -46,7 +46,7 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromARGB(255, 72, 34, 16),
         iconSize: 40,
-        selectedFontSize: 20,
+        selectedFontSize: 15,
         unselectedFontSize: 15,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,

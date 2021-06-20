@@ -3,11 +3,16 @@ import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
 
 class CadastroComodo extends StatefulWidget {
+  final Comodo comodo;
+
+  CadastroComodo({this.comodo});
+
   @override
   _CadastroComodoState createState() => _CadastroComodoState();
 }
 
 class _CadastroComodoState extends State<CadastroComodo> {
+  bool editando;
   List<Comodo> comodos = List<Comodo>();
 
   final tituloController = TextEditingController();
@@ -21,6 +26,17 @@ class _CadastroComodoState extends State<CadastroComodo> {
     OperacoesComodo().getComodos().then((lista) {
       comodos = lista;
     });
+
+    final comodo = widget.comodo;
+
+    if (comodo == null) {
+      editando = false;
+    } else {
+      editando = true;
+      tituloController.text = comodo.titulo;
+      descricaoController.text = comodo.descricao;
+      valorTipoComodo = comodo.tipoComodo;
+    }
   }
 
   int gerarIndex() {
@@ -32,7 +48,13 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
   _btCadastrar() {
     //Pegando os valores
-    final id = gerarIndex();
+    int id;
+    if (editando == true) {
+      id = widget.comodo.id;
+    } else {
+      id = gerarIndex();
+    }
+
     final titulo = tituloController.text;
     final descricao = descricaoController.text;
     final tipoComodo = Text(valorTipoComodo).data;
@@ -49,8 +71,11 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
     //Atribuindo valores e cadastrando no banco de dados
     final novoComodo = Comodo(id, titulo, descricao, valorTotal, tipoComodo);
-
-    OperacoesComodo().inserir(novoComodo);
+    if (editando == true) {
+      OperacoesComodo().atualizar(novoComodo);
+    } else {
+      OperacoesComodo().inserir(novoComodo);
+    }
 
     //Chamando a outra tela
     setState(() {
@@ -107,7 +132,9 @@ class _CadastroComodoState extends State<CadastroComodo> {
                     child: Text(value),
                   );
                 }).toList()),
-            FlatButton(child: Text('Novo cômodo'), onPressed: _btCadastrar),
+            FlatButton(
+                child: editando == true ? Text('Salvar') : Text('Cadastrar'),
+                onPressed: _btCadastrar),
             FlatButton(child: Text('Cancelar'), onPressed: _btCancelar)
           ],
         ),
