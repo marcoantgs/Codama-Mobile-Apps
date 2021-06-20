@@ -6,15 +6,6 @@ import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:pdf/widgets.dart' as pdfLib;
-import 'package:share_extend/share_extend.dart';
-import 'package:path_provider/path_provider.dart';
-
-
-
 class TelaComodo extends StatefulWidget {
   @override
   _TelaComodo createState() => _TelaComodo();
@@ -77,21 +68,6 @@ class _TelaComodo extends State<TelaComodo> {
     });
   }
   
-  _creatPdf(BuildContext context, gasto, valor) async{
-     final pdfLib.Document pdf = pdfLib.Document(deflate: zlib.encode);
-
-     pdf.addPage(pdfLib.MultiPage(
-
-        
-       build: (context) => [
-         pdfLib.Table.fromTextArray(data: <List<String>>[
-           <String>['Gasto', 'Valor'],
-           [gasto, valor]
-         ])
-       ]));
-     
-     
-  }
 
   
   
@@ -116,10 +92,6 @@ class _TelaComodo extends State<TelaComodo> {
             ),
             //Image.asset('assets/images/logo2.png'),
             GastoComodoLista(_listaGasto),
-            RaisedButton(onPressed: (){
-              _creatPdf(context, gasto, valor);
-            }
-            )
          
 
           ],
