@@ -27,16 +27,22 @@ dependencies:
   path_provider: 
   path: 
 
-  
+
 
   flutter_native_splash: ^0.2.8
   dropdownfield: "1.0.3"
+  
+  pdf: ^1.11.2
+  advance_pdf_viewer: ^1.2.0
+  share_extend: ^1.1.9
 
 flutter_native_splash:
  color: "#482210"
  image: assets/images/logo.png
  android: true
  ios: true
+
+  
 
 
 dev_dependencies:
