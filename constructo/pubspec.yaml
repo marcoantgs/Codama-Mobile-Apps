@@ -29,12 +29,10 @@ dependencies:
 
 
 
-  flutter_native_splash: ^0.2.8
+  flutter_native_splash: ^0.2.4
   dropdownfield: "1.0.3"
   
-  pdf: ^1.11.2
-  advance_pdf_viewer: ^1.2.0
-  share_extend: ^1.1.9
+  pdf: ^3.2.0
 
 flutter_native_splash:
  color: "#482210"

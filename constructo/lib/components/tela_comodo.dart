@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:constructo/components/comodo_cadastro.dart';
 import 'package:constructo/components/gasto_cadastro.dart';
 import 'package:constructo/components/gasto_lista.dart';
@@ -5,12 +7,9 @@ import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
 
-import 'package:flutter/material.dart';
-import 'package:pdf/widgets.dart' as pdfLib;
-import 'package:share_extend/share_extend.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+import 'package:pdf/widgets.dart' as pw;
 
 class TelaComodo extends StatefulWidget {
   @override
@@ -18,7 +17,10 @@ class TelaComodo extends StatefulWidget {
 
   final Comodo comodo;
 
+  final pdf = pw.Document();
+
   TelaComodo(this.comodo);
+
 }
 
 class _TelaComodo extends State<TelaComodo> {
@@ -73,31 +75,22 @@ class _TelaComodo extends State<TelaComodo> {
               builder: (context) => CadastroGasto(comodo: widget.comodo)));
     });
   }
-  /*
-  _creatPdf(contex, name, lastName, year) async {
-    final pdfLib.Document pdf = pdfLib.Document(deflate: zlib.encode);
 
-    pdf.addPage(pdfLib.MultiPage(
-        build: (context) => [
-              pdfLib.Table.fromTextArray(data: <List<String>>[
-                <String>['Nome', 'Sobrenome', 'Idade'],
-                [name, lastName, year]
-              ])
-            ]));
+  _enviandoPDF() async {
+    final pdf = pw.Document();
 
-    final String dir = (await getApplicationDocumentsDirectory()).path;
-
-    final String path = '$dir/pdfExample.pdf';
-    final File file = File(path);
-    file.writeAsBytesSync(pdf.save());
-
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (_) => ViewPdf(
-              path,
-            )));
+    pdf.addPage(pw.Page(
+      pageFormat: PdfPageFormat.a4,
+      build: (pw.Context context) {
+        return pw.Center(
+          child: pw.Text("Hello World"),
+        ); // Center
+      })); // Page
+      final file = File("example.pdf");
+      await file.writeAsBytes(await pdf.save());
   }
-}
-*/
+  
+  
   
 
   
@@ -123,7 +116,12 @@ class _TelaComodo extends State<TelaComodo> {
             ),
             //Image.asset('assets/images/logo2.png'),
             GastoComodoLista(_listaGasto),
-
+            RaisedButton(
+                onPressed: () {
+                  _enviandoPDF();
+                },
+                child: Text('Criar PDF'),
+              )
             
          
 
