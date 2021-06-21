@@ -29,11 +29,8 @@ dependencies:
 
 
 
-  flutter_native_splash: ^0.2.4
-  dropdownfield: "1.0.3"
+  pdf: ^3.4.2
   
-  pdf: ^3.2.0
-
 flutter_native_splash:
  color: "#482210"
  image: assets/images/logo.png
