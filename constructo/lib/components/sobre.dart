@@ -41,33 +41,32 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-              height: 130,
+              margin: const EdgeInsets.all(15.0),
+              height: 90,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/logo2.png'),
                 ),
               ),
             ),
-            Column(
-              children: <Widget>[
-                Text(
-                  "O aplicativo Constructo foi desenvolvido pela equipe Codama, composta pelos alunos:\n\n"
-                  "Acley Filho\n"
-                  "Arthur Ribeiro\n"
-                  "Lucas de Sena\n"
-                  "Marco Antonio Silva\n\n"
-                  "A função principal da aplicação é auxiliar na organização do que está sendo realizado em cada cômodo de sua construção e efetuar a contabilização das despesas ao longo do tempo.\n\n"
-                  "A aplicação permite o cadastro dos cômodos com título e descrição. Cada cômodo adicionado tem sua página contendo as informações e a lista de itens, onde o você poderá organizar todos os serviços realizados durante a construção juntamente com os custos.\n\n"
-                  "Esses registros serão armazenados e ficarão disponíveis para consulta e edição quando desejar. Na página de cada cômodo você terá a opção para gerar um relatório em PDF contendo a lista detalhada de itens do cômodo atual.\n\n"
-                  "Semestre 2021/1\n\n",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 72, 34, 16),
-                    fontSize: 15,
-                  ),
+            Container(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "O aplicativo Constructo foi desenvolvido pela equipe Codama, composta pelos alunos:\n\n"
+                "Acley Filho\n"
+                "Arthur Ribeiro\n"
+                "Lucas de Sena\n"
+                "Marco Antonio Silva\n\n"
+                "A função principal da aplicação é auxiliar na organização do que está sendo realizado em cada cômodo de sua construção e efetuar a contabilização das despesas ao longo do tempo.\n\n"
+                "A aplicação permite o cadastro dos cômodos com título e descrição. Cada cômodo adicionado tem sua página contendo as informações e a lista de itens, onde o você poderá organizar todos os serviços realizados durante a construção juntamente com os custos.\n\n"
+                "Esses registros serão armazenados e ficarão disponíveis para consulta e edição quando desejar. Na página de cada cômodo você terá a opção para gerar um relatório em PDF contendo a lista detalhada de itens do cômodo atual.\n\n"
+                "Semestre 2021/1",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 72, 34, 16),
+                  fontSize: 15,
                 ),
-              ],
+              ),
             ),
           ],
         ),
