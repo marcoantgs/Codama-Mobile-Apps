@@ -21,7 +21,6 @@ class TelaComodo extends StatefulWidget {
   final pdf = pw.Document();
 
   TelaComodo(this.comodo);
-
 }
 
 class _TelaComodo extends State<TelaComodo> {
@@ -47,7 +46,6 @@ class _TelaComodo extends State<TelaComodo> {
       });
     });
   }
-
 
   final List<Gasto> _listaGasto = [];
 
@@ -82,21 +80,17 @@ class _TelaComodo extends State<TelaComodo> {
     final output = await getTemporaryDirectory();
 
     pdf.addPage(pw.Page(
-      pageFormat: PdfPageFormat.a4,
-      build: (pw.Context context) {
-        return pw.Center(
-          child: pw.Text("Hello World"),
-        ); // Center
-      })); // Page
-      final file = File("example.pdf");
-      await file.writeAsBytes(await pdf.save());
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Text("Hello World"),
+          ); // Center
+        })); // Page
+    //final file = File("example.pdf");
+    final file = File("${output.path}/example.pdf");
+    await file.writeAsBytes(await pdf.save());
   }
-  
-  
-  
 
-  
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,14 +114,11 @@ class _TelaComodo extends State<TelaComodo> {
             GastoComodoLista(_listaGasto),
 
             RaisedButton(
-                onPressed: () {
-                  _enviandoPDF();
-                },
-                child: Text('Criar PDF'),
-              )
-            
-         
-
+              onPressed: () {
+                _enviandoPDF();
+              },
+              child: Text('Criar PDF'),
+            )
           ],
         ),
       ),

@@ -31,13 +31,23 @@ class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
               height: 130,
               width: double.infinity,
               child: Center(
-                  child: Text(
-                "Sobre o aplicativo",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
+                child: Text(
+                  "Sobre o aplicativo",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
                 ),
-              )),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+              height: 130,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/logo2.png'),
+                ),
+              ),
             ),
           ],
         ),
