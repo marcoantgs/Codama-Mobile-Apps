@@ -6,7 +6,7 @@ class Sobre extends StatefulWidget {
   _SobreState createState() => _SobreState();
 }
 
-class _SobreState extends State<Sobre> with SingleTickerProviderStateMixin {
+class _SobreState extends State<Sobre> {
   _trocaDeTela(int index) {
     if (index == 0) {
       setState(() {

@@ -1,3 +1,4 @@
+import 'package:constructo/components/sobre.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,19 @@ class _CadastroComodoState extends State<CadastroComodo> {
       tituloController.text = comodo.titulo;
       descricaoController.text = comodo.descricao;
       valorTipoComodo = comodo.tipoComodo;
+    }
+  }
+
+  _trocaDeTela(int index) {
+    if (index == 0) {
+      setState(() {
+        Navigator.popAndPushNamed(context, '/home');
+      });
+    } else if (index == 2) {
+      setState(() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Sobre()));
+      });
     }
   }
 
@@ -89,55 +103,100 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
+    return Scaffold(
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            TextField(
-              controller: tituloController,
-              decoration: InputDecoration(labelText: 'Título'),
-            ),
-            TextField(
-                controller: descricaoController,
-                decoration: InputDecoration(labelText: 'Descrição')),
-            DropdownButton<String>(
-                value: valorTipoComodo,
-                icon: const Icon(Icons.arrow_downward),
-                iconSize: 24,
-                elevation: 16,
-                style: const TextStyle(color: Color.fromARGB(255, 72, 34, 16)),
-                underline: Container(
-                  height: 2,
-                  color: Color.fromARGB(255, 72, 34, 16),
+            Container(
+              color: Color.fromARGB(255, 72, 34, 16),
+              height: 130,
+              width: double.infinity,
+              child: Center(
+                child: Text(
+                  "Cadastrar cômodo",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
                 ),
-                onChanged: (String newValue) {
-                  setState(() {
-                    valorTipoComodo = newValue;
-                  });
-                },
-                items: <String>[
-                  'Selecione',
-                  'Área de Serviços',
-                  'Banheiro',
-                  'Cozinha',
-                  'Escritório',
-                  'Oficina',
-                  'Quarto',
-                  'Sala'
-                ].map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList()),
-            FlatButton(
-                child: editando == true ? Text('Salvar') : Text('Cadastrar'),
-                onPressed: _btCadastrar),
-            FlatButton(child: Text('Cancelar'), onPressed: _btCancelar)
+              ),
+            ),
+            Card(
+              elevation: 5,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Column(
+                  children: <Widget>[
+                    TextField(
+                      controller: tituloController,
+                      decoration: InputDecoration(labelText: 'Título'),
+                    ),
+                    TextField(
+                        controller: descricaoController,
+                        decoration: InputDecoration(labelText: 'Descrição')),
+                    DropdownButton<String>(
+                        value: valorTipoComodo,
+                        icon: const Icon(Icons.arrow_downward),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(
+                            color: Color.fromARGB(255, 72, 34, 16)),
+                        underline: Container(
+                          height: 2,
+                          color: Color.fromARGB(255, 72, 34, 16),
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            valorTipoComodo = newValue;
+                          });
+                        },
+                        items: <String>[
+                          'Selecione',
+                          'Área de Serviços',
+                          'Banheiro',
+                          'Cozinha',
+                          'Escritório',
+                          'Oficina',
+                          'Quarto',
+                          'Sala'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList()),
+                    FlatButton(
+                        child: editando == true
+                            ? Text('Salvar')
+                            : Text('Cadastrar'),
+                        onPressed: _btCadastrar),
+                    FlatButton(child: Text('Cancelar'), onPressed: _btCancelar)
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color.fromARGB(255, 72, 34, 16),
+        iconSize: 40,
+        selectedFontSize: 15,
+        unselectedFontSize: 15,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined), label: 'Cômodo'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline), label: 'Sobre'),
+        ],
+        onTap: (index) {
+          _trocaDeTela(index);
+        },
       ),
     );
   }
