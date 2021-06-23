@@ -124,13 +124,15 @@ class _TelaComodo extends State<TelaComodo> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Color.fromARGB(255, 72, 34, 16),
+        foregroundColor: Colors.white,
         onPressed: () => _telaCadastroGasto(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromARGB(255, 72, 34, 16),
         iconSize: 40,
-        selectedFontSize: 20,
+        selectedFontSize: 15,
         unselectedFontSize: 15,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.white,
