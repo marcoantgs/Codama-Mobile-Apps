@@ -6,11 +6,12 @@ import 'package:constructo/components/gasto_lista.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
+import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 
 import 'package:pdf/widgets.dart' as pw;
+import 'package:permission_handler/permission_handler.dart';
 
 class TelaComodo extends StatefulWidget {
   @override
@@ -77,18 +78,32 @@ class _TelaComodo extends State<TelaComodo> {
 
   _enviandoPDF() async {
     final pdf = pw.Document();
-    final output = await getTemporaryDirectory();
 
-    pdf.addPage(pw.Page(
-        pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Text("Hello World"),
-          ); // Center
-        })); // Page
-    //final file = File("example.pdf");
-    final file = File("${output.path}/example.pdf");
-    await file.writeAsBytes(await pdf.save());
+    //Pegando o caminho da pasta de downloads
+    String pathDownloads = await ExtStorage.getExternalStoragePublicDirectory(
+        ExtStorage.DIRECTORY_DOWNLOADS);
+
+    //Checando se tem permissão para salvar o arquivo
+    var status = await Permission.storage.status;
+
+    //Criando nome do documento
+    String nomePDF = "Constructo - " + widget.comodo.titulo;
+
+    //Se não tiver a permisssão de "Armazenar arquivos" pede para dar essa permissão
+    //Se já tiver a permissão salva o arquivo
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    } else {
+      pdf.addPage(pw.Page(
+          pageFormat: PdfPageFormat.a4,
+          build: (pw.Context context) {
+            return pw.Center(
+              child: pw.Text('Olá'),
+            ); // Center
+          })); // Page
+      File file = File("$pathDownloads/$nomePDF.pdf");
+      await file.writeAsBytes(await pdf.save());
+    }
   }
 
   @override
@@ -110,15 +125,14 @@ class _TelaComodo extends State<TelaComodo> {
                 ),
               )),
             ),
-            //Image.asset('assets/images/logo2.png'),
-            GastoComodoLista(_listaGasto),
-
             RaisedButton(
               onPressed: () {
                 _enviandoPDF();
               },
               child: Text('Criar PDF'),
-            )
+            ),
+            //Image.asset('assets/images/logo2.png'),
+            GastoLista(_listaGasto),
           ],
         ),
       ),

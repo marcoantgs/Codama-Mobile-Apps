@@ -26,6 +26,8 @@ dependencies:
   sqflite: 
   path_provider: 
   path: 
+  ext_storage:
+  permission_handler:
 
 
 

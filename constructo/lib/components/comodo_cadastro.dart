@@ -132,9 +132,9 @@ class _CadastroComodoState extends State<CadastroComodo> {
                       decoration: InputDecoration(labelText: 'Título'),
                     ),
                     TextField(
-                        maxLines: 3,
-                        controller: descricaoController,
-                        decoration: InputDecoration(labelText: 'Descrição')),
+                      controller: descricaoController,
+                      decoration: InputDecoration(labelText: 'Descrição'),
+                    ),
                     Container(
                       padding: const EdgeInsets.all(10.0),
                     ),
@@ -176,26 +176,27 @@ class _CadastroComodoState extends State<CadastroComodo> {
                       height: 45,
                       width: 400,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 72, 34, 16), // background
-                          onPrimary: Colors.white, // foreground
-                        ),
-                        child: editando == true
-                            ? Text('Salvar')
-                            : Text('Cadastrar'),
-                        onPressed: _btCadastrar),
+                          style: ElevatedButton.styleFrom(
+                            primary:
+                                Color.fromARGB(255, 72, 34, 16), // background
+                            onPrimary: Colors.white, // foreground
+                          ),
+                          child: editando == true
+                              ? Text('Salvar')
+                              : Text('Cadastrar'),
+                          onPressed: _btCadastrar),
                     ),
                     Container(
                       padding: const EdgeInsets.all(5.0),
                       height: 45,
                       width: 400,
                       child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.brown[50], // background
-                          onPrimary: Colors.black, // foreground
-                        ),
-                      child: Text('Cancelar'), 
-                      onPressed: _btCancelar)
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.brown[50], // background
+                            onPrimary: Colors.black, // foreground
+                          ),
+                          child: Text('Cancelar'),
+                          onPressed: _btCancelar),
                     ),
                   ],
                 ),

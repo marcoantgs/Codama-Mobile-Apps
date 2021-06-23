@@ -1,9 +1,9 @@
 import 'package:constructo/models/gasto.dart';
 import 'package:flutter/material.dart';
 
-class GastoComodoLista extends StatelessWidget {
+class GastoLista extends StatelessWidget {
   final List<Gasto> gastos;
-  GastoComodoLista(this.gastos);
+  GastoLista(this.gastos);
 
   @override
   Widget build(BuildContext context) {
