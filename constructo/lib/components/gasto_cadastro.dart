@@ -3,6 +3,7 @@ import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CadastroGasto extends StatefulWidget {
   final Comodo comodo;
@@ -35,11 +36,53 @@ class _CadastroGastoState extends State<CadastroGasto> {
     //Pegando os valores
     final id = 0;
     final titulo = tituloController.text;
-    final valor = double.tryParse(valorController.text) ?? 0.0;
+    final valor = double.tryParse(valorController.text);
     final comodo = widget.comodo.id;
 
+    //Tratando campos
     //Caso o titulo esteja vazio
     if (titulo.isEmpty) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Aviso'),
+          content: Text('O campo "Titulo" não pode estar vazio.'),
+        ),
+      );
+      return;
+    } else
+    //Caso o valor esteja vazio
+    if (valorController.text.isEmpty) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Aviso'),
+          content: Text('O campo "Valor" não pode estar vazio.'),
+        ),
+      );
+      return;
+    } else
+    //Caso o valor seja 0
+    if (valor == 0 || valor == 0.0) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Aviso'),
+          content: Text('O campo "Valor" não pode ser "0".'),
+        ),
+      );
+      return;
+    } else
+    //Caso o valor não seja um número
+    if (valor == null) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Aviso'),
+          content:
+              Text('O campo "Valor" precisa ser um número. \n EX: 1 ou 1.1'),
+        ),
+      );
       return;
     }
 
@@ -89,7 +132,10 @@ class _CadastroGastoState extends State<CadastroGasto> {
                     ),
                     TextField(
                       controller: valorController,
-                      decoration: InputDecoration(labelText: 'valor')),
+                      decoration: InputDecoration(labelText: 'valor'),
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                    ),
                     Container(
                       padding: const EdgeInsets.all(10.0),
                     ),
@@ -99,25 +145,25 @@ class _CadastroGastoState extends State<CadastroGasto> {
                       height: 45,
                       width: 400,
                       child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 72, 34, 16), // background
-                          onPrimary: Colors.white, // foreground
-                        ),
-                        child: Text('Novo Gasto'),
-                        onPressed: _btCadastrar),
+                          style: ElevatedButton.styleFrom(
+                            primary:
+                                Color.fromARGB(255, 72, 34, 16), // background
+                            onPrimary: Colors.white, // foreground
+                          ),
+                          child: Text('Novo Gasto'),
+                          onPressed: _btCadastrar),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(5.0),
-                      height: 45,
-                      width: 400,
-                      child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.brown[50], // background
-                          onPrimary: Colors.black, // foreground
-                        ),
-                      child: Text('Cancelar'), 
-                      onPressed: _btCancelar)
-                    ),
+                        padding: const EdgeInsets.all(5.0),
+                        height: 45,
+                        width: 400,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.brown[50], // background
+                              onPrimary: Colors.black, // foreground
+                            ),
+                            child: Text('Cancelar'),
+                            onPressed: _btCancelar)),
                   ],
                 ),
               ),
@@ -147,12 +193,4 @@ class _CadastroGastoState extends State<CadastroGasto> {
       ),
     );
   }
-
-
-
-
-
-
-
-
 }

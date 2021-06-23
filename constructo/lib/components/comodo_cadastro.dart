@@ -63,6 +63,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
   _btCadastrar() {
     //Pegando os valores
     int id;
+
     if (editando == true) {
       id = widget.comodo.id;
     } else {
@@ -74,12 +75,27 @@ class _CadastroComodoState extends State<CadastroComodo> {
     final tipoComodo = Text(valorTipoComodo).data;
     final valorTotal = 0.0;
 
+    //Tratando campos
     //Caso o titulo esteja vazio
     if (titulo.isEmpty) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Aviso'),
+          content: Text('O campo "Titulo" não pode estar vazio.'),
+        ),
+      );
       return;
     } else
     //Caso não tenha selecioando o tipo
     if (tipoComodo.compareTo('Selecione') == 0) {
+      showDialog<String>(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Aviso'),
+          content: Text('Selecione o tipo do cômodo.'),
+        ),
+      );
       return;
     }
 
@@ -133,10 +149,22 @@ class _CadastroComodoState extends State<CadastroComodo> {
                     ),
                     TextField(
                       controller: descricaoController,
-                      decoration: InputDecoration(labelText: 'Descrição'),
+                      decoration: InputDecoration(
+                        labelText: 'Descrição',
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(10.0),
+                    ),
+                    Container(
+                      child: Text(
+                        'Tipo',
+                        style: TextStyle(
+                          color: Colors.grey[700],
+                          fontSize: 12,
+                        ),
+                      ),
+                      alignment: Alignment.bottomLeft,
                     ),
                     DropdownButton<String>(
                         isExpanded: true,
@@ -145,7 +173,8 @@ class _CadastroComodoState extends State<CadastroComodo> {
                         iconSize: 24,
                         elevation: 16,
                         style: const TextStyle(
-                            color: Color.fromARGB(255, 72, 34, 16)),
+                          color: Color.fromARGB(255, 72, 34, 16),
+                        ),
                         underline: Container(
                           height: 2,
                           color: Color.fromARGB(255, 72, 34, 16),
