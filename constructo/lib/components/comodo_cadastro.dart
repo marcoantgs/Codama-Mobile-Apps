@@ -132,9 +132,14 @@ class _CadastroComodoState extends State<CadastroComodo> {
                       decoration: InputDecoration(labelText: 'Título'),
                     ),
                     TextField(
+                        maxLines: 3,
                         controller: descricaoController,
                         decoration: InputDecoration(labelText: 'Descrição')),
+                    Container(
+                      padding: const EdgeInsets.all(10.0),
+                    ),
                     DropdownButton<String>(
+                        isExpanded: true,
                         value: valorTipoComodo,
                         icon: const Icon(Icons.arrow_downward),
                         iconSize: 24,
@@ -165,12 +170,33 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             child: Text(value),
                           );
                         }).toList()),
-                    FlatButton(
+                    Container(
+                      padding: const EdgeInsets.all(5.0),
+                      margin: const EdgeInsets.only(top: 20.0),
+                      height: 45,
+                      width: 400,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Color.fromARGB(255, 72, 34, 16), // background
+                          onPrimary: Colors.white, // foreground
+                        ),
                         child: editando == true
                             ? Text('Salvar')
                             : Text('Cadastrar'),
                         onPressed: _btCadastrar),
-                    FlatButton(child: Text('Cancelar'), onPressed: _btCancelar)
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(5.0),
+                      height: 45,
+                      width: 400,
+                      child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.brown[50], // background
+                          onPrimary: Colors.black, // foreground
+                        ),
+                      child: Text('Cancelar'), 
+                      onPressed: _btCancelar)
+                    ),
                   ],
                 ),
               ),
