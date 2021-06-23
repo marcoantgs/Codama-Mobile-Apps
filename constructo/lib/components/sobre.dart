@@ -41,15 +41,6 @@ class _SobreState extends State<Sobre> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
-              height: 90,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/logo2.png'),
-                ),
-              ),
-            ),
-            Container(
               padding: const EdgeInsets.all(15.0),
               margin: const EdgeInsets.all(15.0),
               decoration: BoxDecoration(color: Colors.black.withOpacity(0.7)),
