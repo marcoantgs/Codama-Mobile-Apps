@@ -41,7 +41,7 @@ class _SobreState extends State<Sobre> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(15.0),
+              margin: const EdgeInsets.fromLTRB(15, 15, 15, 0),
               height: 90,
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -51,6 +51,8 @@ class _SobreState extends State<Sobre> {
             ),
             Container(
               padding: const EdgeInsets.all(15.0),
+              margin: const EdgeInsets.all(15.0),
+              decoration: BoxDecoration(color: Colors.black.withOpacity(0.7)),
               child: Text(
                 "O aplicativo Constructo foi desenvolvido pela equipe Codama, composta pelos alunos:\n\n"
                 "Acley Filho\n"
@@ -63,7 +65,7 @@ class _SobreState extends State<Sobre> {
                 "Semestre 2021/1",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color.fromARGB(255, 72, 34, 16),
+                  color: Colors.white,
                   fontSize: 15,
                 ),
               ),
