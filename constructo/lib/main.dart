@@ -9,7 +9,7 @@ void main() {
   runApp(MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.brown,
-        accentColor: Colors.amber,
+        accentColor: Color.fromARGB(255, 72, 34, 16),
       ),
       home: HomeConstructo(),
       onGenerateRoute: (RouteSettings settings) {

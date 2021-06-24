@@ -68,15 +68,15 @@ class _HomeConstructo extends State<HomeConstructo> {
                 ),
               )),
             ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(20, 120, 20, 0),
-              height: 130,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/logo2.png'),
-                ),
-              ),
-            ),
+            // Container(
+            //   margin: const EdgeInsets.fromLTRB(20, 120, 20, 0),
+            //   height: 130,
+            //   decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //       image: AssetImage('assets/images/logo2.png'),
+            //     ),
+            //   ),
+            // ),
             ComodoLista(_listaComodos),
           ],
         ),

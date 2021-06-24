@@ -116,21 +116,35 @@ class _TelaComodo extends State<TelaComodo> {
               color: Color.fromARGB(255, 72, 34, 16),
               height: 130,
               width: double.infinity,
-              child: Center(
-                  child: Text(
-                widget.comodo.titulo,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                ),
-              )),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Container(
+                    width: 180,
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      widget.comodo.titulo,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 30,
+                    width: 180,
+                    alignment: Alignment.bottomRight,
+                    child: RaisedButton(
+                      onPressed: () {
+                        _enviandoPDF();
+                      },
+                      child: Text('Criar PDF'),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            RaisedButton(
-              onPressed: () {
-                _enviandoPDF();
-              },
-              child: Text('Criar PDF'),
-            ),
+
             //Image.asset('assets/images/logo2.png'),
             GastoLista(_listaGasto),
           ],
