@@ -5,6 +5,7 @@ import 'package:constructo/components/gasto_cadastro.dart';
 import 'package:constructo/components/gasto_lista.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
+import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart';
@@ -106,6 +107,19 @@ class _TelaComodo extends State<TelaComodo> {
     }
   }
 
+  _valorTotal() {
+    double valorTotal = 0.0;
+
+    for (var i = 0; i < _listaGasto.length; i++) {
+      valorTotal += _listaGasto[i].valor;
+    }
+
+    widget.comodo.valorTotal = valorTotal;
+
+    OperacoesComodo().atualizar(widget.comodo);
+    return valorTotal;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,12 +158,31 @@ class _TelaComodo extends State<TelaComodo> {
                 ],
               ),
             ),
-
-            //Image.asset('assets/images/logo2.png'),
             GastoLista(_listaGasto),
+            _listaGasto.isEmpty
+                ? Container(
+                    child: Text(
+                      'Ainda não há nenhum gasto!',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+                : Container(
+                    child: Text(
+                      _valorTotal().toString(),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
+                  )
           ],
         ),
       ),
+      //extendBody: true,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Color.fromARGB(255, 72, 34, 16),

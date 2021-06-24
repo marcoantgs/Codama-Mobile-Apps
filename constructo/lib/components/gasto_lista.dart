@@ -9,7 +9,7 @@ class GastoLista extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 385,
+        height: 365,
         child: gastos.isEmpty
             ? Container(
                 padding: const EdgeInsets.all(15.0),

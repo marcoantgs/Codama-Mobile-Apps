@@ -19,7 +19,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
   final tituloController = TextEditingController();
   final descricaoController = TextEditingController();
-  String valorTipoComodo = 'Selecione';
+  String valorTipoComodo;
 
   @override
   void initState() {
@@ -38,19 +38,6 @@ class _CadastroComodoState extends State<CadastroComodo> {
       tituloController.text = comodo.titulo;
       descricaoController.text = comodo.descricao;
       valorTipoComodo = comodo.tipoComodo;
-    }
-  }
-
-  _trocaDeTela(int index) {
-    if (index == 0) {
-      setState(() {
-        Navigator.popAndPushNamed(context, '/home');
-      });
-    } else if (index == 2) {
-      setState(() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Sobre()));
-      });
     }
   }
 
@@ -73,7 +60,14 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
     final titulo = tituloController.text;
     final descricao = descricaoController.text;
-    final tipoComodo = Text(valorTipoComodo).data;
+    var tipoComodo;
+
+    if (valorTipoComodo == null) {
+      tipoComodo = "";
+    } else {
+      tipoComodo = Text(valorTipoComodo).data;
+    }
+
     final valorTotal = 0.0;
 
     //Tratando campos
@@ -89,7 +83,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
       return;
     } else
     //Caso não tenha selecioando o tipo
-    if (tipoComodo.compareTo('Selecione') == 0) {
+    if (tipoComodo == "") {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
@@ -122,75 +116,35 @@ class _CadastroComodoState extends State<CadastroComodo> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 100,
-              margin: const EdgeInsets.only(bottom: 0, top: 50.0),
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  "Cadastro de cômodos",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/imagem-fundo1.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 100,
+                margin: const EdgeInsets.only(bottom: 0, top: 50.0),
+                width: double.infinity,
+                child: Center(
+                  child: Text(
+                    "Cadastro de cômodos",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 30,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 30.0, right: 30.0, bottom: 50.0),
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      child: Text(
-                        'Tipo:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      alignment: Alignment.bottomLeft,
-                      padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
-                    ),
-                    Container(
-                      padding:
-                        EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(5)),
-                      child: DropdownButton<String>(
-                        isExpanded: true,
-                        value: valorTipoComodo,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 30,
-                        underline: SizedBox(),
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 72, 34, 16),
-                        ),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            valorTipoComodo = newValue;
-                          });
-                        },
-                        items: <String>[
-                          'Selecione',
-                          'Área de Serviços',
-                          'Banheiro',
-                          'Cozinha',
-                          'Escritório',
-                          'Oficina',
-                          'Quarto',
-                          'Sala'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList()),
-                    ),
                     Container(
                       child: Text(
                         'Título:',
@@ -204,14 +158,14 @@ class _CadastroComodoState extends State<CadastroComodo> {
                       padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
                     ),
                     TextField(
-                          controller: tituloController,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
-                            fillColor: Colors.white,
-                            filled: true,
-                            border: OutlineInputBorder(),
-                            hintText: 'Insira o título do cômodo'
-                          ),
+                      controller: tituloController,
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15.0, horizontal: 50.0),
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(),
+                          hintText: 'Insira o título do cômodo'),
                     ),
                     Container(
                       child: Text(
@@ -226,14 +180,65 @@ class _CadastroComodoState extends State<CadastroComodo> {
                       padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
                     ),
                     TextField(
-                          controller: descricaoController,
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
-                            fillColor: Colors.white,
-                            filled: true,
-                            border: OutlineInputBorder(),
-                            hintText: 'Insira a descrião do cômodo'
+                      controller: descricaoController,
+                      decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 15.0, horizontal: 50.0),
+                          fillColor: Colors.white,
+                          filled: true,
+                          border: OutlineInputBorder(),
+                          hintText: 'Insira a descrião do cômodo'),
+                    ),
+                    Container(
+                      child: Text(
+                        'Tipo:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      alignment: Alignment.bottomLeft,
+                      padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: DropdownButton<String>(
+                          hint: Center(
+                            child: Text('Escolha o tipo do cômodo'),
                           ),
+                          isExpanded: true,
+                          value: valorTipoComodo,
+                          icon: Icon(Icons.arrow_drop_down),
+                          iconSize: 30,
+                          underline: SizedBox(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              valorTipoComodo = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'Área de Serviços',
+                            'Banheiro',
+                            'Cozinha',
+                            'Escritório',
+                            'Oficina',
+                            'Quarto',
+                            'Sala'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Center(
+                                child: Text(value),
+                              ),
+                            );
+                          }).toList()),
                     ),
                     Container(
                       padding: const EdgeInsets.all(10.0),
@@ -250,16 +255,18 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             onPrimary: Colors.white, // foreground
                           ),
                           child: editando == true
-                              ? Text('Salvar cômodo',
+                              ? Text(
+                                  'Salvar cômodo',
                                   style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              )
-                              : Text('Adicionar cômodo',
-                                style: TextStyle(
                                     fontSize: 17,
                                   ),
-                              ),
+                                )
+                              : Text(
+                                  'Adicionar cômodo',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ),
                           onPressed: _btCadastrar),
                     ),
                     Container(
@@ -271,18 +278,19 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             primary: Colors.black, // background
                             onPrimary: Colors.white, // foreground
                           ),
-                          child: Text('Cancelar',
+                          child: Text(
+                            'Cancelar',
                             style: TextStyle(
-                                fontSize: 17,
-                              ),
+                              fontSize: 17,
+                            ),
                           ),
                           onPressed: _btCancelar),
                     ),
                   ],
                 ),
               ),
-
-          ],
+            ],
+          ),
         ),
       ),
     );

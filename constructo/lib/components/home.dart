@@ -60,23 +60,15 @@ class _HomeConstructo extends State<HomeConstructo> {
               height: 130,
               width: double.infinity,
               child: Center(
-                  child: Text(
-                "Seja bem-vindo(a)!",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
+                child: Text(
+                  "Seja bem-vindo(a)!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 25,
+                  ),
                 ),
-              )),
+              ),
             ),
-            // Container(
-            //   margin: const EdgeInsets.fromLTRB(20, 120, 20, 0),
-            //   height: 130,
-            //   decoration: BoxDecoration(
-            //     image: DecorationImage(
-            //       image: AssetImage('assets/images/logo2.png'),
-            //     ),
-            //   ),
-            // ),
             ComodoLista(_listaComodos),
           ],
         ),

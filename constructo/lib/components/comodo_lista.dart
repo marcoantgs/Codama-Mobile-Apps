@@ -18,7 +18,7 @@ class _ComodoLista extends State<ComodoLista> {
     final comodos = widget.comodos;
     return Center(
       child: Container(
-        height: 385,
+        height: 435,
         child: comodos.isEmpty
             ? Container(
                 padding: const EdgeInsets.all(15.0),

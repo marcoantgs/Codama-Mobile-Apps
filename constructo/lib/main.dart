@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.brown,
+        primaryColor: Color.fromARGB(255, 72, 34, 16),
         accentColor: Color.fromARGB(255, 72, 34, 16),
       ),
       home: HomeConstructo(),
