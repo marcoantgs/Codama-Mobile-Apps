@@ -99,7 +99,29 @@ class _TelaComodo extends State<TelaComodo> {
               pageFormat: PdfPageFormat.a4,
               build: (pw.Context context) {
                 return pw.Center(
-                  child: pw.ListView(),
+                  child: pw.ListView.builder(
+                    itemCount: _listaGasto.length,
+                    // ignore: missing_return
+                    itemBuilder: (context, index){
+                       //final ga = _listaGasto[index];
+                        Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Container(
+                                  width: 180,
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    widget.comodo.titulo,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                    }
+                  ),
                 ); // Center
               })); // Page
           File file = File("$pathDownloads/$nomePDF.pdf");
