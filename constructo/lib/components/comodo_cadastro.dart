@@ -1,6 +1,7 @@
 import 'package:constructo/components/sobre.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CadastroComodo extends StatefulWidget {
@@ -124,59 +125,49 @@ class _CadastroComodoState extends State<CadastroComodo> {
         child: Column(
           children: <Widget>[
             Container(
-              color: Color.fromARGB(255, 72, 34, 16),
-              height: 130,
+              height: 100,
+              margin: const EdgeInsets.only(bottom: 0, top: 50.0),
               width: double.infinity,
               child: Center(
                 child: Text(
-                  "Cadastrar cômodo",
+                  "Cadastro de cômodos",
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
                   ),
                 ),
               ),
             ),
-            Card(
-              elevation: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
+            Padding(
+                padding: const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 30.0),
                 child: Column(
                   children: <Widget>[
-                    TextField(
-                      controller: tituloController,
-                      decoration: InputDecoration(labelText: 'Título'),
-                    ),
-                    TextField(
-                      controller: descricaoController,
-                      decoration: InputDecoration(
-                        labelText: 'Descrição',
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                    ),
                     Container(
                       child: Text(
-                        'Tipo',
+                        'Tipo:',
                         style: TextStyle(
-                          color: Colors.grey[700],
-                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
                         ),
                       ),
                       alignment: Alignment.bottomLeft,
+                      padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
                     ),
-                    DropdownButton<String>(
+                    Container(
+                      padding:
+                        EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5)),
+                      child: DropdownButton<String>(
                         isExpanded: true,
                         value: valorTipoComodo,
-                        icon: const Icon(Icons.arrow_downward),
-                        iconSize: 24,
-                        elevation: 16,
+                        icon: Icon(Icons.arrow_drop_down),
+                        iconSize: 30,
+                        underline: SizedBox(),
                         style: const TextStyle(
-                          color: Color.fromARGB(255, 72, 34, 16),
-                        ),
-                        underline: Container(
-                          height: 2,
                           color: Color.fromARGB(255, 72, 34, 16),
                         ),
                         onChanged: (String newValue) {
@@ -199,10 +190,58 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             child: Text(value),
                           );
                         }).toList()),
+                    ),
+                    Container(
+                      child: Text(
+                        'Título:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      alignment: Alignment.bottomLeft,
+                      padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
+                    ),
+                    TextField(
+                          controller: tituloController,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
+                            fillColor: Colors.white,
+                            filled: true,
+                            border: OutlineInputBorder(),
+                            hintText: 'Insira o título do cômodo'
+                          ),
+                    ),
+                    Container(
+                      child: Text(
+                        'Descrição:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      alignment: Alignment.bottomLeft,
+                      padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
+                    ),
+                    TextField(
+                          controller: descricaoController,
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 50.0),
+                            fillColor: Colors.white,
+                            filled: true,
+                            border: OutlineInputBorder(),
+                            hintText: 'Insira a descrião do cômodo'
+                          ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(10.0),
+                    ),
                     Container(
                       padding: const EdgeInsets.all(5.0),
                       margin: const EdgeInsets.only(top: 20.0),
-                      height: 45,
+                      height: 55,
                       width: 400,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
@@ -211,48 +250,40 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             onPrimary: Colors.white, // foreground
                           ),
                           child: editando == true
-                              ? Text('Salvar')
-                              : Text('Cadastrar'),
+                              ? Text('Salvar cômodo',
+                                  style: TextStyle(
+                                  fontSize: 17,
+                                ),
+                              )
+                              : Text('Adicionar cômodo',
+                                style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                              ),
                           onPressed: _btCadastrar),
                     ),
                     Container(
                       padding: const EdgeInsets.all(5.0),
-                      height: 45,
+                      height: 55,
                       width: 400,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.brown[50], // background
-                            onPrimary: Colors.black, // foreground
+                            primary: Colors.black, // background
+                            onPrimary: Colors.white, // foreground
                           ),
-                          child: Text('Cancelar'),
+                          child: Text('Cancelar',
+                            style: TextStyle(
+                                fontSize: 17,
+                              ),
+                          ),
                           onPressed: _btCancelar),
                     ),
                   ],
                 ),
               ),
-            ),
+
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color.fromARGB(255, 72, 34, 16),
-        iconSize: 40,
-        selectedFontSize: 15,
-        unselectedFontSize: 15,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined), label: 'Cômodo'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline), label: 'Sobre'),
-        ],
-        onTap: (index) {
-          _trocaDeTela(index);
-        },
       ),
     );
   }
