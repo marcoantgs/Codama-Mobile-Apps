@@ -93,13 +93,25 @@ class _TelaComodo extends State<TelaComodo> {
     //Se não tiver a permisssão de "Armazenar arquivos" pede para dar essa permissão
     //Se já tiver a permissão salva o arquivo
     if (!status.isGranted) {
-      await Permission.storage.request();
+      await Permission.storage.request().then((value) async {
+        if (value.isGranted) {
+          pdf.addPage(pw.Page(
+              pageFormat: PdfPageFormat.a4,
+              build: (pw.Context context) {
+                return pw.Center(
+                  child: pw.ListView(),
+                ); // Center
+              })); // Page
+          File file = File("$pathDownloads/$nomePDF.pdf");
+          await file.writeAsBytes(await pdf.save());
+        }
+      });
     } else {
       pdf.addPage(pw.Page(
           pageFormat: PdfPageFormat.a4,
           build: (pw.Context context) {
             return pw.Center(
-              child: pw.Text('Olá'),
+              child: pw.ListView(),
             ); // Center
           })); // Page
       File file = File("$pathDownloads/$nomePDF.pdf");
