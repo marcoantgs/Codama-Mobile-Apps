@@ -64,6 +64,7 @@ flutter:
   assets:
    - 'assets/images/logo2.png'
    - 'assets/images/logo.png'
+   - 'assets/images/imagem-fundo1.jpg'
    - 'assets/images/imagem-fundo2.jpg'
   #   - images/a_dot_ham.jpeg
 
