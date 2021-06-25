@@ -77,6 +77,33 @@ class _TelaComodo extends State<TelaComodo> {
     });
   }
 
+  _textoTituloPDF() {
+    var tituloPdf = '';
+
+    tituloPdf = 'Cômodo: ${widget.comodo.titulo}';
+
+    return tituloPdf;
+  }
+
+  _textoGastosPDF() {
+    var gastoPdf = '';
+
+    for (var i = 0; i < _listaGasto.length; i++) {
+      gastoPdf += "${_listaGasto[i].titulo} = R\$ ${_listaGasto[i].valor}";
+      gastoPdf += '\n';
+    }
+
+    return gastoPdf;
+  }
+
+  _textoValorTotalPDF() {
+    var valortotalPdf = '';
+
+    valortotalPdf = 'Valor total = R\$ ${widget.comodo.valorTotal}';
+
+    return valortotalPdf;
+  }
+
   _enviandoPDF() async {
     final pdf = pw.Document();
 
@@ -90,51 +117,79 @@ class _TelaComodo extends State<TelaComodo> {
     //Criando nome do documento
     String nomePDF = "Constructo - " + widget.comodo.titulo;
 
+    //Criando a página PDF
+    pdf.addPage(
+      pw.Page(
+        pageFormat: PdfPageFormat.a4,
+        build: (pw.Context context) {
+          return pw.Center(
+            child: pw.Column(
+              children: <pw.Widget>[
+                pw.Row(
+                  children: [
+                    pw.PdfLogo(),
+                    pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
+                    pw.Text(
+                      'Constructo',
+                      style: pw.TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+                pw.Header(
+                  level: 0,
+                  child: pw.Text(
+                    _textoTituloPDF(),
+                    style: pw.TextStyle(
+                      fontSize: 20,
+                      fontWeight: pw.FontWeight.bold,
+                      color: PdfColors.white,
+                    ),
+                  ),
+                  padding: pw.EdgeInsets.all(4),
+                  margin: pw.EdgeInsets.only(top: 10, bottom: 10),
+                  decoration:
+                      pw.BoxDecoration(color: PdfColor.fromHex('#482210')),
+                ),
+                pw.Text(
+                  _textoGastosPDF(),
+                  style: pw.TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
+                pw.Header(
+                  level: 1,
+                  child: pw.Text(
+                    _textoValorTotalPDF(),
+                    style: pw.TextStyle(
+                      fontSize: 20,
+                      fontWeight: pw.FontWeight.bold,
+                      color: PdfColors.white,
+                    ),
+                  ),
+                  padding: pw.EdgeInsets.all(4),
+                  decoration:
+                      pw.BoxDecoration(color: PdfColor.fromHex('#482210')),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+
     //Se não tiver a permisssão de "Armazenar arquivos" pede para dar essa permissão
-    //Se já tiver a permissão salva o arquivo
+    //caso permita salva o arquivo
+    //Ou se já tiver a permissão salva o arquivo
     if (!status.isGranted) {
       await Permission.storage.request().then((value) async {
         if (value.isGranted) {
-          pdf.addPage(pw.Page(
-              pageFormat: PdfPageFormat.a4,
-              build: (pw.Context context) {
-                return pw.Center(
-                  child: pw.ListView.builder(
-                      itemCount: _listaGasto.length,
-                      // ignore: missing_return
-                      itemBuilder: (context, index) {
-                        //final ga = _listaGasto[index];
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Container(
-                              width: 180,
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                widget.comodo.titulo,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      }),
-                ); // Center
-              })); // Page
           File file = File("$pathDownloads/$nomePDF.pdf");
           await file.writeAsBytes(await pdf.save());
         }
       });
     } else {
-      pdf.addPage(pw.Page(
-          pageFormat: PdfPageFormat.a4,
-          build: (pw.Context context) {
-            return pw.Center(
-              child: pw.ListView(),
-            ); // Center
-          })); // Page
       File file = File("$pathDownloads/$nomePDF.pdf");
       await file.writeAsBytes(await pdf.save());
     }
@@ -186,10 +241,24 @@ class _TelaComodo extends State<TelaComodo> {
               width: double.infinity,
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
+                heroTag: 'btPDF',
                 child: Icon(Icons.picture_as_pdf_outlined, size: 50),
                 backgroundColor: Color.fromARGB(255, 72, 34, 16),
                 foregroundColor: Colors.white,
-                onPressed: () => _enviandoPDF(),
+                onPressed: () {
+                  if (_listaGasto.isNotEmpty) {
+                    _enviandoPDF();
+                  } else {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: Text('Aviso'),
+                        content: Text('Seu cômodo não tem nenhum gasto'),
+                      ),
+                    );
+                    return;
+                  }
+                },
               ),
             ),
             GastoLista(_listaGasto),
@@ -218,6 +287,7 @@ class _TelaComodo extends State<TelaComodo> {
       ),
       //extendBody: true,
       floatingActionButton: FloatingActionButton(
+        heroTag: 'btAddGasto',
         child: Icon(Icons.add),
         backgroundColor: Color.fromARGB(255, 72, 34, 16),
         foregroundColor: Colors.white,
