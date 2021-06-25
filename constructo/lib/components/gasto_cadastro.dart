@@ -45,9 +45,16 @@ class _CadastroGastoState extends State<CadastroGasto> {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Aviso'),
-          content: Text('O campo "Titulo" não pode estar vazio.'),
-        ),
+            title: Text('Aviso'),
+            content: Text('O campo "Título" não pode estar vazio.'),
+            actions: [
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]),
       );
       return;
     } else
@@ -56,9 +63,16 @@ class _CadastroGastoState extends State<CadastroGasto> {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Aviso'),
-          content: Text('O campo "Valor" não pode estar vazio.'),
-        ),
+            title: Text('Aviso'),
+            content: Text('O campo "Valor" não pode estar vazio.'),
+            actions: [
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]),
       );
       return;
     } else
@@ -67,9 +81,16 @@ class _CadastroGastoState extends State<CadastroGasto> {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Aviso'),
-          content: Text('O campo "Valor" não pode ser "0".'),
-        ),
+            title: Text('Aviso'),
+            content: Text('O campo "Valor" não pode ser "0".'),
+            actions: [
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]),
       );
       return;
     } else
@@ -78,10 +99,17 @@ class _CadastroGastoState extends State<CadastroGasto> {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Aviso'),
-          content:
-              Text('O campo "Valor" precisa ser um número. \n EX: 1 ou 1.1'),
-        ),
+            title: Text('Aviso'),
+            content: Text('O campo "Valor" precisa ser um número. \n \n' +
+                'Ex.: 1 ou 1.1'),
+            actions: [
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]),
       );
       return;
     }
@@ -132,7 +160,7 @@ class _CadastroGastoState extends State<CadastroGasto> {
                     ),
                     TextField(
                       controller: valorController,
-                      decoration: InputDecoration(labelText: 'valor'),
+                      decoration: InputDecoration(labelText: 'Valor'),
                       keyboardType:
                           TextInputType.numberWithOptions(decimal: true),
                     ),
@@ -150,7 +178,7 @@ class _CadastroGastoState extends State<CadastroGasto> {
                                 Color.fromARGB(255, 72, 34, 16), // background
                             onPrimary: Colors.white, // foreground
                           ),
-                          child: Text('Novo Gasto'),
+                          child: Text('Novo gasto'),
                           onPressed: _btCadastrar),
                     ),
                     Container(
