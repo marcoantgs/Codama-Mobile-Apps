@@ -27,14 +27,29 @@ class GastoLista extends StatelessWidget {
                   return Card(
                     child: Row(
                       children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 8),
+                                child: Text(
+                                  ga.titulo,
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                         Container(
                           color: Colors.black,
-                          width: 80,
+                          width: 100,
                           height: 60,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
+                          child: Center(
                             child: Text(
-                              ga.valor.toString(),
+                              "Valor: \n" + "R\$ " + ga.valor.toString(),
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -42,20 +57,6 @@ class GastoLista extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8),
-                              child: Text(
-                                ga.titulo,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   );

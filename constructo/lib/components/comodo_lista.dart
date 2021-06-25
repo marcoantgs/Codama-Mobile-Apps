@@ -48,11 +48,13 @@ class _ComodoLista extends State<ComodoLista> {
                         children: <Widget>[
                           Container(
                             color: Colors.black,
-                            width: 80,
+                            width: 90,
                             height: 60,
                             child: Center(
                               child: Text(
-                                co.valorTotal.toString(),
+                                "Total gasto: \n" +
+                                    "R\$ " +
+                                    co.valorTotal.toString(),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 15,
@@ -68,9 +70,9 @@ class _ComodoLista extends State<ComodoLista> {
                                   child: Text(
                                     co.titulo,
                                     style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                    ),
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Container(
@@ -78,9 +80,9 @@ class _ComodoLista extends State<ComodoLista> {
                                   child: Text(
                                     co.descricao,
                                     style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                    ),
+                                        color: Colors.black54,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                                 Container(
@@ -88,9 +90,9 @@ class _ComodoLista extends State<ComodoLista> {
                                   child: Text(
                                     co.tipoComodo,
                                     style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 10,
-                                    ),
+                                        color: Colors.grey,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ),
                               ],

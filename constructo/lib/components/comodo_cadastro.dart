@@ -76,9 +76,16 @@ class _CadastroComodoState extends State<CadastroComodo> {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Aviso'),
-          content: Text('O campo "Titulo" não pode estar vazio.'),
-        ),
+            title: Text('Aviso'),
+            content: Text('O campo "Titulo" não pode estar vazio.'),
+            actions: [
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]),
       );
       return;
     } else
@@ -87,9 +94,16 @@ class _CadastroComodoState extends State<CadastroComodo> {
       showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Text('Aviso'),
-          content: Text('Selecione o tipo do cômodo.'),
-        ),
+            title: Text('Aviso'),
+            content: Text('Selecione o tipo do cômodo.'),
+            actions: [
+              FlatButton(
+                child: Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]),
       );
       return;
     }
@@ -186,7 +200,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
                         fillColor: Colors.white,
                         filled: true,
                         border: OutlineInputBorder(),
-                        hintText: 'Insira a descrião do cômodo'),
+                        hintText: 'Insira a descrição do cômodo'),
                   ),
                   Container(
                     child: Text(

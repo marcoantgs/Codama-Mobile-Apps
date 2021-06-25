@@ -140,7 +140,7 @@ class _CadastroGastoState extends State<CadastroGasto> {
               width: double.infinity,
               child: Center(
                 child: Text(
-                  "Cadastrar gasto",
+                  "Cadastro de gastos",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,

@@ -252,9 +252,16 @@ class _TelaComodo extends State<TelaComodo> {
                     showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
-                        title: Text('Aviso'),
-                        content: Text('Seu cômodo não tem nenhum gasto'),
-                      ),
+                          title: Text('Aviso'),
+                          content: Text('Seu cômodo não tem nenhum gasto'),
+                          actions: [
+                            FlatButton(
+                              child: Text("Ok"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ]),
                     );
                     return;
                   }
@@ -274,10 +281,12 @@ class _TelaComodo extends State<TelaComodo> {
                     ),
                   )
                 : Container(
+                    decoration:
+                        BoxDecoration(color: Colors.black.withOpacity(0.7)),
                     child: Text(
-                      _valorTotal().toString(),
+                      "Valor total = R\$ " + _valorTotal().toString(),
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.white,
                         fontSize: 16,
                       ),
                     ),
