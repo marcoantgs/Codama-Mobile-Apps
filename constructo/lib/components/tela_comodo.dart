@@ -100,28 +100,27 @@ class _TelaComodo extends State<TelaComodo> {
               build: (pw.Context context) {
                 return pw.Center(
                   child: pw.ListView.builder(
-                    itemCount: _listaGasto.length,
-                    // ignore: missing_return
-                    itemBuilder: (context, index){
-                       //final ga = _listaGasto[index];
+                      itemCount: _listaGasto.length,
+                      // ignore: missing_return
+                      itemBuilder: (context, index) {
+                        //final ga = _listaGasto[index];
                         Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                Container(
-                                  width: 180,
-                                  alignment: Alignment.centerRight,
-                                  child: Text(
-                                    widget.comodo.titulo,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                    ),
-                                  ),
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Container(
+                              width: 180,
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                widget.comodo.titulo,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
                                 ),
-                              ],
-                            );
-                    }
-                  ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
                 ); // Center
               })); // Page
           File file = File("$pathDownloads/$nomePDF.pdf");
@@ -162,14 +161,14 @@ class _TelaComodo extends State<TelaComodo> {
           children: <Widget>[
             Container(
               color: Color.fromARGB(255, 72, 34, 16),
-              height: 130,
+              height: 80,
               width: double.infinity,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Container(
-                    width: 180,
-                    alignment: Alignment.centerRight,
+                    width: 360,
+                    alignment: Alignment.bottomCenter,
                     child: Text(
                       widget.comodo.titulo,
                       style: TextStyle(
@@ -178,18 +177,19 @@ class _TelaComodo extends State<TelaComodo> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: 30,
-                    width: 180,
-                    alignment: Alignment.bottomRight,
-                    child: RaisedButton(
-                      onPressed: () {
-                        _enviandoPDF();
-                      },
-                      child: Text('Criar PDF'),
-                    ),
-                  ),
                 ],
+              ),
+            ),
+            Container(
+              color: Color.fromARGB(255, 72, 34, 16),
+              height: 50,
+              width: double.infinity,
+              alignment: Alignment.bottomRight,
+              child: FloatingActionButton(
+                child: Icon(Icons.picture_as_pdf_outlined, size: 50),
+                backgroundColor: Color.fromARGB(255, 72, 34, 16),
+                foregroundColor: Colors.white,
+                onPressed: () => _enviandoPDF(),
               ),
             ),
             GastoLista(_listaGasto),
