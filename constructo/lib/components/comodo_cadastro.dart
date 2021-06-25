@@ -115,19 +115,19 @@ class _CadastroComodoState extends State<CadastroComodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+      body: Container(
+        alignment: Alignment.center,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/imagem-fundo1.jpg'),
-              fit: BoxFit.cover,
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/imagem-fundo2.jpg'),
+                    fit: BoxFit.cover
             ),
           ),
           child: Column(
             children: <Widget>[
               Container(
-                height: 100,
-                margin: const EdgeInsets.only(bottom: 0, top: 50.0),
+                height: 60,
+                margin: const EdgeInsets.only(top: 50.0),
                 width: double.infinity,
                 child: Center(
                   child: Text(
@@ -142,7 +142,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 30.0, right: 30.0, bottom: 50.0),
+                    left: 30.0, right: 30.0, bottom: 00.0),
                 child: Column(
                   children: <Widget>[
                     Container(
@@ -155,7 +155,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
                         ),
                       ),
                       alignment: Alignment.bottomLeft,
-                      padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
+                      padding: const EdgeInsets.only(bottom: 5.0, top: 10.0),
                     ),
                     TextField(
                       controller: tituloController,
@@ -286,12 +286,22 @@ class _CadastroComodoState extends State<CadastroComodo> {
                           ),
                           onPressed: _btCancelar),
                     ),
+                    Container(
+                      padding: const EdgeInsets.all(30.0),
+                      margin: const EdgeInsets.only(top: 30.0),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/logo.png'),
+                          
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ],
           ),
-        ),
       ),
     );
   }
