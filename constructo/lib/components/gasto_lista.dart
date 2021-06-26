@@ -7,9 +7,11 @@ class GastoLista extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double alturaTela = MediaQuery.of(context).size.height;
     return Center(
       child: Container(
-        height: 365,
+        //height: 365,
+        height: alturaTela * 0.5704,
         child: gastos.isEmpty
             ? Container(
                 width: 210,

@@ -13,10 +13,12 @@ class ComodoLista extends StatefulWidget {
 class _ComodoLista extends State<ComodoLista> {
   @override
   Widget build(BuildContext context) {
+    double alturaTela = MediaQuery.of(context).size.height;
     final comodos = widget.comodos;
     return Center(
       child: Container(
-        height: 435,
+        //height: 435,
+        height: alturaTela * 0.6797,
         child: comodos.isEmpty
             ? Container(
                 width: 210,

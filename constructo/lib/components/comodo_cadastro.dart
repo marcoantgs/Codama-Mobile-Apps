@@ -1,4 +1,3 @@
-import 'package:constructo/components/sobre.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/cupertino.dart';
@@ -174,6 +173,8 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             alignment: Alignment.bottomLeft,
                           ),
                           TextField(
+                            textAlign: TextAlign.center,
+                            maxLength: 22,
                             controller: tituloController,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -199,6 +200,8 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             alignment: Alignment.bottomLeft,
                           ),
                           TextField(
+                            textAlign: TextAlign.center,
+                            maxLength: 22,
                             controller: descricaoController,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(
@@ -206,7 +209,8 @@ class _CadastroComodoState extends State<CadastroComodo> {
                                 fillColor: Colors.white,
                                 filled: true,
                                 border: OutlineInputBorder(),
-                                hintText: 'Insira a descrição do cômodo'),
+                                hintText: 'Insira a descrição do cômodo',
+                                hintStyle: TextStyle(fontSize: 15)),
                           ),
                         ],
                       ),
