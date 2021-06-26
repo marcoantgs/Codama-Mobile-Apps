@@ -1,5 +1,3 @@
-import 'package:constructo/components/comodo_cadastro.dart';
-import 'package:constructo/components/tela_comodo.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +19,7 @@ class _ComodoLista extends State<ComodoLista> {
         height: 435,
         child: comodos.isEmpty
             ? Container(
-                padding: const EdgeInsets.all(15.0),
-                margin: const EdgeInsets.all(15.0),
+                width: 210,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/logo2.png'),
@@ -36,11 +33,8 @@ class _ComodoLista extends State<ComodoLista> {
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    TelaComodo(comodos[index])));
+                        Navigator.popAndPushNamed(context, '/comodo',
+                            arguments: comodos[index]);
                       });
                     },
                     child: Card(
@@ -106,13 +100,9 @@ class _ComodoLista extends State<ComodoLista> {
                                     GestureDetector(
                                       onTap: () {
                                         setState(() {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      CadastroComodo(
-                                                          comodo:
-                                                              comodos[index])));
+                                          Navigator.popAndPushNamed(
+                                              context, '/adicionarComodo',
+                                              arguments: comodos[index]);
                                         });
                                       },
                                       child: Icon(

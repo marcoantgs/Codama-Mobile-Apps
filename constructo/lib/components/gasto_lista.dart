@@ -12,8 +12,7 @@ class GastoLista extends StatelessWidget {
         height: 365,
         child: gastos.isEmpty
             ? Container(
-                padding: const EdgeInsets.all(15.0),
-                margin: const EdgeInsets.all(15.0),
+                width: 210,
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/images/logo2.png'),

@@ -1,4 +1,3 @@
-import 'package:constructo/components/sobre.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
@@ -7,7 +6,7 @@ import 'package:flutter/services.dart';
 
 class CadastroGasto extends StatefulWidget {
   final Comodo comodo;
-  CadastroGasto({this.comodo});
+  CadastroGasto(this.comodo);
 
   @override
   _CadastroGastoState createState() => _CadastroGastoState();
@@ -18,19 +17,6 @@ class _CadastroGastoState extends State<CadastroGasto> {
 
   final tituloController = TextEditingController();
   final valorController = TextEditingController();
-
-  _trocaDeTela(int index) {
-    if (index == 0) {
-      setState(() {
-        Navigator.popAndPushNamed(context, '/home');
-      });
-    } else if (index == 2) {
-      setState(() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Sobre()));
-      });
-    }
-  }
 
   _btCadastrar() {
     //Pegando os valores
@@ -125,7 +111,7 @@ class _CadastroGastoState extends State<CadastroGasto> {
   }
 
   _btCancelar() {
-    Navigator.pop(context);
+    Navigator.popAndPushNamed(context, '/home');
   }
 
   @override
@@ -198,26 +184,6 @@ class _CadastroGastoState extends State<CadastroGasto> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color.fromARGB(255, 72, 34, 16),
-        iconSize: 40,
-        selectedFontSize: 15,
-        unselectedFontSize: 15,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined), label: 'Cômodo'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline), label: 'Sobre'),
-        ],
-        onTap: (index) {
-          _trocaDeTela(index);
-        },
       ),
     );
   }

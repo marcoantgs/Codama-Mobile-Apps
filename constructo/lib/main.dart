@@ -17,15 +17,17 @@ void main() {
         switch (settings.name) {
           case '/home':
             return MaterialPageRoute(builder: (context) => HomeConstructo());
-          case '/adicionar':
-            return MaterialPageRoute(builder: (context) => CadastroComodo());
+          case '/adicionarComodo':
+            return MaterialPageRoute(
+                builder: (context) => CadastroComodo(arguments));
           case '/sobre':
             return MaterialPageRoute(builder: (context) => Sobre());
           case '/comodo':
             return MaterialPageRoute(
                 builder: (context) => TelaComodo(arguments));
-          case '/gasto':
-            return MaterialPageRoute(builder: (context) => CadastroGasto());
+          case '/adicionarGasto':
+            return MaterialPageRoute(
+                builder: (context) => CadastroGasto(arguments));
           default:
             return null;
         }

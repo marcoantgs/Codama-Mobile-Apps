@@ -38,13 +38,11 @@ class _HomeConstructo extends State<HomeConstructo> {
   _trocaDeTela(int index) {
     if (index == 1) {
       setState(() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => CadastroComodo()));
+        Navigator.popAndPushNamed(context, '/adicionarComodo');
       });
     } else if (index == 2) {
       setState(() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Sobre()));
+        Navigator.popAndPushNamed(context, '/sobre');
       });
     }
   }

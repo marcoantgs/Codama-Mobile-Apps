@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class CadastroComodo extends StatefulWidget {
   final Comodo comodo;
 
-  CadastroComodo({this.comodo});
+  CadastroComodo(this.comodo);
 
   @override
   _CadastroComodoState createState() => _CadastroComodoState();
@@ -123,7 +123,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
   }
 
   _btCancelar() {
-    Navigator.pop(context);
+    Navigator.popAndPushNamed(context, '/home');
   }
 
   @override
@@ -136,183 +136,194 @@ class _CadastroComodoState extends State<CadastroComodo> {
               image: AssetImage('assets/images/imagem-fundo1.jpg'),
               fit: BoxFit.cover),
         ),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 60,
-              margin: const EdgeInsets.only(top: 50.0),
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  "Cadastro de cômodos",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                child: Container(
+                  height: 500,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        height: 60,
+                        child: Center(
+                          child: Text(
+                            "Cadastro de cômodos",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              'Título:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            alignment: Alignment.bottomLeft,
+                          ),
+                          TextField(
+                            controller: tituloController,
+                            decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15.0, horizontal: 50.0),
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(),
+                                hintText: 'Insira o título do cômodo'),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              'Descrição:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            alignment: Alignment.bottomLeft,
+                          ),
+                          TextField(
+                            controller: descricaoController,
+                            decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15.0, horizontal: 50.0),
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(),
+                                hintText: 'Insira a descrição do cômodo'),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              'Tipo:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            alignment: Alignment.bottomLeft,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(5)),
+                            child: DropdownButton<String>(
+                                hint: Center(
+                                  child: Text('Escolha o tipo do cômodo'),
+                                ),
+                                isExpanded: true,
+                                value: valorTipoComodo,
+                                icon: Icon(Icons.arrow_drop_down),
+                                iconSize: 30,
+                                underline: SizedBox(),
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                ),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    valorTipoComodo = newValue;
+                                  });
+                                },
+                                items: <String>[
+                                  'Área de Serviços',
+                                  'Banheiro',
+                                  'Cozinha',
+                                  'Escritório',
+                                  'Oficina',
+                                  'Quarto',
+                                  'Sala'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Center(
+                                      child: Text(value),
+                                    ),
+                                  );
+                                }).toList()),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.all(5.0),
+                            height: 55,
+                            width: 400,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color.fromARGB(
+                                      255, 72, 34, 16), // background
+                                  onPrimary: Colors.white, // foreground
+                                ),
+                                child: editando == true
+                                    ? Text(
+                                        'Salvar cômodo',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Adicionar cômodo',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                onPressed: _btCadastrar),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5.0),
+                            height: 55,
+                            width: 400,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.black, // background
+                                  onPrimary: Colors.white, // foreground
+                                ),
+                                child: Text(
+                                  'Cancelar',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                onPressed: _btCancelar),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 40,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/logo.png'),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 30.0, right: 30.0, bottom: 00.0),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child: Text(
-                      'Título:',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    alignment: Alignment.bottomLeft,
-                    padding: const EdgeInsets.only(bottom: 5.0, top: 10.0),
-                  ),
-                  TextField(
-                    controller: tituloController,
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 50.0),
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: OutlineInputBorder(),
-                        hintText: 'Insira o título do cômodo'),
-                  ),
-                  Container(
-                    child: Text(
-                      'Descrição:',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    alignment: Alignment.bottomLeft,
-                    padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
-                  ),
-                  TextField(
-                    controller: descricaoController,
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 15.0, horizontal: 50.0),
-                        fillColor: Colors.white,
-                        filled: true,
-                        border: OutlineInputBorder(),
-                        hintText: 'Insira a descrição do cômodo'),
-                  ),
-                  Container(
-                    child: Text(
-                      'Tipo:',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    alignment: Alignment.bottomLeft,
-                    padding: const EdgeInsets.only(bottom: 5.0, top: 20.0),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: DropdownButton<String>(
-                        hint: Center(
-                          child: Text('Escolha o tipo do cômodo'),
-                        ),
-                        isExpanded: true,
-                        value: valorTipoComodo,
-                        icon: Icon(Icons.arrow_drop_down),
-                        iconSize: 30,
-                        underline: SizedBox(),
-                        style: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            valorTipoComodo = newValue;
-                          });
-                        },
-                        items: <String>[
-                          'Área de Serviços',
-                          'Banheiro',
-                          'Cozinha',
-                          'Escritório',
-                          'Oficina',
-                          'Quarto',
-                          'Sala'
-                        ].map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Center(
-                              child: Text(value),
-                            ),
-                          );
-                        }).toList()),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10.0),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5.0),
-                    margin: const EdgeInsets.only(top: 20.0),
-                    height: 55,
-                    width: 400,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary:
-                              Color.fromARGB(255, 72, 34, 16), // background
-                          onPrimary: Colors.white, // foreground
-                        ),
-                        child: editando == true
-                            ? Text(
-                                'Salvar cômodo',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              )
-                            : Text(
-                                'Adicionar cômodo',
-                                style: TextStyle(
-                                  fontSize: 17,
-                                ),
-                              ),
-                        onPressed: _btCadastrar),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(5.0),
-                    height: 55,
-                    width: 400,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.black, // background
-                          onPrimary: Colors.white, // foreground
-                        ),
-                        child: Text(
-                          'Cancelar',
-                          style: TextStyle(
-                            fontSize: 17,
-                          ),
-                        ),
-                        onPressed: _btCancelar),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(30.0),
-                    margin: const EdgeInsets.only(top: 30.0),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/logo.png'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

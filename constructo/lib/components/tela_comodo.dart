@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:constructo/components/comodo_cadastro.dart';
-import 'package:constructo/components/gasto_cadastro.dart';
 import 'package:constructo/components/gasto_lista.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
@@ -58,23 +56,13 @@ class _TelaComodo extends State<TelaComodo> {
       });
     } else if (index == 1) {
       setState(() {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => CadastroComodo()));
+        Navigator.popAndPushNamed(context, '/adicionarComodo');
       });
     } else if (index == 2) {
       setState(() {
         Navigator.popAndPushNamed(context, '/sobre');
       });
     }
-  }
-
-  _telaCadastroGasto() {
-    setState(() {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CadastroGasto(comodo: widget.comodo)));
-    });
   }
 
   _textoTituloPDF() {
@@ -268,40 +256,55 @@ class _TelaComodo extends State<TelaComodo> {
                 },
               ),
             ),
-            GastoLista(_listaGasto),
-            _listaGasto.isEmpty
-                ? Container(
-                    child: Text(
-                      'Ainda não há nenhum gasto!',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+            Column(
+              children: <Widget>[
+                GastoLista(_listaGasto),
+                _listaGasto.isEmpty
+                    ? Container(
+                        alignment: Alignment.center,
+                        height: 56,
+                        child: Text(
+                          'Ainda não há nenhum gasto!',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.only(left: 75.0, right: 75.0),
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 56,
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.7)),
+                          child: Text(
+                            "Valor total = R\$ " + _valorTotal().toString(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  )
-                : Container(
-                    decoration:
-                        BoxDecoration(color: Colors.black.withOpacity(0.7)),
-                    child: Text(
-                      "Valor total = R\$ " + _valorTotal().toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  )
+              ],
+            ),
           ],
         ),
       ),
       //extendBody: true,
       floatingActionButton: FloatingActionButton(
-        heroTag: 'btAddGasto',
-        child: Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 72, 34, 16),
-        foregroundColor: Colors.white,
-        onPressed: () => _telaCadastroGasto(),
-      ),
+          heroTag: 'btAddGasto',
+          child: Icon(Icons.add),
+          backgroundColor: Color.fromARGB(255, 72, 34, 16),
+          foregroundColor: Colors.white,
+          onPressed: () {
+            setState(() {
+              Navigator.popAndPushNamed(context, '/adicionarGasto',
+                  arguments: widget.comodo);
+            });
+          }),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromARGB(255, 72, 34, 16),
