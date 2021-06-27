@@ -1,6 +1,4 @@
-import 'package:constructo/components/comodo_cadastro.dart';
 import 'package:constructo/components/comodo_lista.dart';
-import 'package:constructo/components/sobre.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +9,15 @@ class HomeConstructo extends StatefulWidget {
 }
 
 class _HomeConstructo extends State<HomeConstructo> {
+  ImageProvider imagem;
   List<Comodo> comodos = List<Comodo>();
 
   @override
   void initState() {
     super.initState();
+
+    //Carregando imagem ao iniciar primeira tela
+    imagem = AssetImage('assets/images/imagem-fundo1.jpg');
 
     OperacoesComodo().getComodos().then((lista) {
       setState(() {
@@ -31,6 +33,12 @@ class _HomeConstructo extends State<HomeConstructo> {
         }
       });
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(imagem, context);
   }
 
   final List<Comodo> _listaComodos = [];
