@@ -2,7 +2,6 @@ import 'package:constructo/models/argumentos.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class CadastroGasto extends StatefulWidget {
   final Argumentos args;

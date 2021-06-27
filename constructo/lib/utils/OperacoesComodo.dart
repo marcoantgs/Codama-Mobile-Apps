@@ -2,7 +2,6 @@ import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/DatabaseConstructo.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite/sqlite_api.dart';
 
 class OperacoesComodo {
   final dbProvider = DataBaseConstructo.instance;

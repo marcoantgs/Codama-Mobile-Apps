@@ -1,6 +1,5 @@
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CadastroComodo extends StatefulWidget {
