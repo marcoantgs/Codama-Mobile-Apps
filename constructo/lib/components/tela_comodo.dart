@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:constructo/components/gasto_lista.dart';
+import 'package:constructo/models/argumentos.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
@@ -258,7 +259,7 @@ class _TelaComodo extends State<TelaComodo> {
             ),
             Column(
               children: <Widget>[
-                GastoLista(_listaGasto),
+                GastoLista(_listaGasto, widget.comodo),
                 _listaGasto.isEmpty
                     ? Container(
                         alignment: Alignment.center,
@@ -302,7 +303,7 @@ class _TelaComodo extends State<TelaComodo> {
           onPressed: () {
             setState(() {
               Navigator.popAndPushNamed(context, '/adicionarGasto',
-                  arguments: widget.comodo);
+                  arguments: Argumentos(widget.comodo, null));
             });
           }),
       bottomNavigationBar: BottomNavigationBar(

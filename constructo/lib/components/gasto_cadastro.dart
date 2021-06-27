@@ -1,29 +1,50 @@
-import 'package:constructo/models/comodo.dart';
+import 'package:constructo/models/argumentos.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CadastroGasto extends StatefulWidget {
-  final Comodo comodo;
-  CadastroGasto(this.comodo);
+  final Argumentos args;
+  CadastroGasto(this.args);
 
   @override
   _CadastroGastoState createState() => _CadastroGastoState();
 }
 
 class _CadastroGastoState extends State<CadastroGasto> {
+  bool editando;
   List<Gasto> gastos = List<Gasto>();
 
   final tituloController = TextEditingController();
   final valorController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+
+    final gasto = widget.args.gasto;
+
+    if (gasto == null) {
+      editando = false;
+    } else {
+      editando = true;
+      tituloController.text = gasto.titulo;
+      valorController.text = gasto.valor.toString();
+    }
+  }
+
   _btCadastrar() {
+    var id;
     //Pegando os valores
-    final id = 0;
+    if (editando == true) {
+      id = widget.args.gasto.id;
+    } else {
+      id = 0;
+    }
     final titulo = tituloController.text;
     final valor = double.tryParse(valorController.text);
-    final comodo = widget.comodo.id;
+    final comodo = widget.args.comodo.id;
 
     //Tratando campos
     //Caso o titulo esteja vazio
@@ -102,16 +123,22 @@ class _CadastroGastoState extends State<CadastroGasto> {
 
     //Atribuindo valores e cadastrando no banco de dados
     final novoGasto = Gasto(id, titulo, valor, comodo);
-    OperacoesGasto().inserir(novoGasto);
+    if (editando == true) {
+      OperacoesGasto().atualizar(novoGasto);
+    } else {
+      OperacoesGasto().inserir(novoGasto);
+    }
 
     //Chamando a outra tela
     setState(() {
-      Navigator.popAndPushNamed(context, '/comodo', arguments: widget.comodo);
+      Navigator.popAndPushNamed(context, '/comodo',
+          arguments: widget.args.comodo);
     });
   }
 
   _btCancelar() {
-    Navigator.popAndPushNamed(context, '/home');
+    Navigator.popAndPushNamed(context, '/comodo',
+        arguments: widget.args.comodo);
   }
 
   @override
@@ -164,7 +191,9 @@ class _CadastroGastoState extends State<CadastroGasto> {
                                 Color.fromARGB(255, 72, 34, 16), // background
                             onPrimary: Colors.white, // foreground
                           ),
-                          child: Text('Novo gasto'),
+                          child: editando == true
+                              ? Text('Salvar gasto')
+                              : Text('Adicionar gasto'),
                           onPressed: _btCadastrar),
                     ),
                     Container(

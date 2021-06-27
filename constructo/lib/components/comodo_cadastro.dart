@@ -174,7 +174,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
                           ),
                           TextField(
                             textAlign: TextAlign.center,
-                            maxLength: 22,
+                            maxLength: 20,
                             controller: tituloController,
                             decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.symmetric(

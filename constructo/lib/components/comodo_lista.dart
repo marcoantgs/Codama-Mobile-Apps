@@ -67,7 +67,7 @@ class _ComodoLista extends State<ComodoLista> {
                                     co.titulo,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        fontSize: 15,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -77,7 +77,7 @@ class _ComodoLista extends State<ComodoLista> {
                                     co.descricao,
                                     style: TextStyle(
                                         color: Colors.black54,
-                                        fontSize: 12,
+                                        fontSize: 11,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -94,66 +94,74 @@ class _ComodoLista extends State<ComodoLista> {
                               ],
                             ),
                           ),
-                          Container(
-                            child: Row(
-                              children: <Widget>[
-                                Row(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          Navigator.popAndPushNamed(
-                                              context, '/adicionarComodo',
-                                              arguments: comodos[index]);
-                                        });
-                                      },
-                                      child: Icon(
-                                        Icons.edit,
-                                        color: Colors.black,
-                                        size: 26.0,
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        showDialog<String>(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              AlertDialog(
-                                            title: const Text('Confirmação'),
-                                            content: Text(
-                                                'Deseja mesmo excluir o cômodo "${comodos[index].titulo}" ?'),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  setState(() {
-                                                    OperacoesComodo().deletar(
-                                                        comodos[index]);
-                                                    comodos.removeAt(index);
-                                                  });
-                                                  Navigator.pop(
-                                                      context, 'Confirmar');
-                                                },
-                                                child: const Text('Confirmar'),
-                                              ),
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    context, 'Cancelar'),
-                                                child: const Text('Cancelar'),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                      child: Icon(
-                                        Icons.delete,
-                                        color: Colors.black,
-                                        size: 26.0,
-                                      ),
-                                    ),
-                                  ],
+                          Row(
+                            children: [
+                              Container(
+                                margin: EdgeInsets.only(right: 2),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[400],
+                                  border: Border.all(color: Colors.black),
                                 ),
-                              ],
-                            ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      Navigator.popAndPushNamed(
+                                          context, '/adicionarComodo',
+                                          arguments: comodos[index]);
+                                    });
+                                  },
+                                  child: Icon(
+                                    Icons.edit,
+                                    color: Colors.black,
+                                    size: 26.0,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(right: 2),
+                                decoration: BoxDecoration(
+                                  color: Colors.red[400],
+                                  border: Border.all(color: Colors.black),
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                        title: const Text('Confirmação'),
+                                        content: Text(
+                                            'Deseja excluir o cômodo: ${comodos[index].titulo} ?'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                OperacoesComodo()
+                                                    .deletar(comodos[index]);
+                                                comodos.removeAt(index);
+                                              });
+                                              Navigator.pop(
+                                                  context, 'Confirmar');
+                                            },
+                                            child: const Text('Confirmar'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () => Navigator.pop(
+                                                context, 'Cancelar'),
+                                            child: const Text('Cancelar'),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  child: Icon(
+                                    Icons.delete,
+                                    color: Colors.black,
+                                    size: 26.0,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
