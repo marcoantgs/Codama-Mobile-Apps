@@ -1,10 +1,7 @@
 import 'dart:io';
 
 import 'package:constructo/components/gasto_lista.dart';
-import 'package:constructo/models/argumentos.dart';
-import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
-import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +14,7 @@ class TelaComodo extends StatefulWidget {
   @override
   _TelaComodo createState() => _TelaComodo();
 
-  final Comodo comodo;
+  final comodo;
 
   final pdf = pw.Document();
 
@@ -184,19 +181,6 @@ class _TelaComodo extends State<TelaComodo> {
     }
   }
 
-  _valorTotal() {
-    double valorTotal = 0.0;
-
-    for (var i = 0; i < _listaGasto.length; i++) {
-      valorTotal += _listaGasto[i].valor;
-    }
-
-    widget.comodo.valorTotal = valorTotal;
-
-    OperacoesComodo().atualizar(widget.comodo);
-    return valorTotal;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -207,21 +191,13 @@ class _TelaComodo extends State<TelaComodo> {
               color: Color.fromARGB(255, 72, 34, 16),
               height: 80,
               width: double.infinity,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Container(
-                    width: 360,
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      widget.comodo.titulo,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                      ),
-                    ),
-                  ),
-                ],
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                widget.comodo.titulo,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
               ),
             ),
             Container(
@@ -257,55 +233,10 @@ class _TelaComodo extends State<TelaComodo> {
                 },
               ),
             ),
-            Column(
-              children: <Widget>[
-                GastoLista(_listaGasto, widget.comodo),
-                _listaGasto.isEmpty
-                    ? Container(
-                        alignment: Alignment.center,
-                        height: 56,
-                        child: Text(
-                          'Ainda não há nenhum gasto!',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.only(left: 75.0, right: 75.0),
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: 56,
-                          decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.7)),
-                          child: Text(
-                            "Valor total = R\$ " + _valorTotal().toString(),
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-              ],
-            ),
+            GastoLista(_listaGasto, widget.comodo),
           ],
         ),
       ),
-      //extendBody: true,
-      floatingActionButton: FloatingActionButton(
-          heroTag: 'btAddGasto',
-          child: Icon(Icons.add),
-          backgroundColor: Color.fromARGB(255, 72, 34, 16),
-          foregroundColor: Colors.white,
-          onPressed: () {
-            setState(() {
-              Navigator.popAndPushNamed(context, '/adicionarGasto',
-                  arguments: Argumentos(widget.comodo, null));
-            });
-          }),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Color.fromARGB(255, 72, 34, 16),

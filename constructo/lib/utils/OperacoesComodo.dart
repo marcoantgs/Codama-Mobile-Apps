@@ -51,6 +51,6 @@ class OperacoesComodo {
   Future deletar(Comodo deletarComodo) async {
     final Database db = await dbProvider.getdatabase();
     await db.delete(nomeTabela, where: "id = ?", whereArgs: [deletarComodo.id]);
-    OperacoesGasto().deletar(deletarComodo.id);
+    OperacoesGasto().deletarTodos(deletarComodo.id);
   }
 }

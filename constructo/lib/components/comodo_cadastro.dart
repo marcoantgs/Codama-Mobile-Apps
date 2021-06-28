@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
@@ -148,8 +149,9 @@ class _CadastroComodoState extends State<CadastroComodo> {
                       Container(
                         height: 60,
                         child: Center(
-                          child: Text(
+                          child: AutoSizeText(
                             "Cadastro de cômodos",
+                            maxFontSize: 96,
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -176,12 +178,15 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             maxLength: 20,
                             controller: tituloController,
                             decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 15.0, horizontal: 50.0),
-                                fillColor: Colors.white,
-                                filled: true,
-                                border: OutlineInputBorder(),
-                                hintText: 'Insira o título do cômodo'),
+                              counterText: '',
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 15.0, horizontal: 20.0),
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(),
+                              hintText: 'Insira o título do cômodo',
+                              hintStyle: TextStyle(fontSize: 15),
+                            ),
                           ),
                         ],
                       ),
@@ -203,13 +208,15 @@ class _CadastroComodoState extends State<CadastroComodo> {
                             maxLength: 22,
                             controller: descricaoController,
                             decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    vertical: 15.0, horizontal: 50.0),
-                                fillColor: Colors.white,
-                                filled: true,
-                                border: OutlineInputBorder(),
-                                hintText: 'Insira a descrição do cômodo',
-                                hintStyle: TextStyle(fontSize: 15)),
+                              counterText: '',
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 15.0, horizontal: 20.0),
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(),
+                              hintText: 'Insira a descrição do cômodo',
+                              hintStyle: TextStyle(fontSize: 15),
+                            ),
                           ),
                         ],
                       ),
@@ -237,7 +244,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
                                 isExpanded: true,
                                 value: valorTipoComodo,
                                 icon: Icon(Icons.arrow_drop_down),
-                                iconSize: 30,
+                                iconSize: 20,
                                 underline: SizedBox(),
                                 style: const TextStyle(
                                   color: Colors.black,

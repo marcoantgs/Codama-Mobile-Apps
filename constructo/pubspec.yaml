@@ -31,6 +31,7 @@ dependencies:
   flutter_native_splash: 
   dropdownfield: ^1.0.3
   pdf: 
+  auto_size_text:
   
 
 flutter_native_splash:
