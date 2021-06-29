@@ -284,15 +284,7 @@ class _CadastroGastoState extends State<CadastroGasto> {
                           ),
                         ],
                       ),
-                      Container(
-                        height: 40,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/logo.png'),
-                          ),
-                        ),
-                      ),
+
                     ],
                   ),
                 ),
