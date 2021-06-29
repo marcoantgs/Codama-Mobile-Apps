@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class CadastroGasto extends StatefulWidget {
   final Argumentos args;
   CadastroGasto(this.args);
-
   @override
   _CadastroGastoState createState() => _CadastroGastoState();
 }
@@ -141,7 +140,6 @@ class _CadastroGastoState extends State<CadastroGasto> {
         arguments: widget.args.comodo);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -224,7 +222,8 @@ class _CadastroGastoState extends State<CadastroGasto> {
                             textAlign: TextAlign.center,
                             maxLength: 20,
                             controller: valorController,
-                            keyboardType: TextInputType.numberWithOptions(decimal: true),
+                            keyboardType:
+                                TextInputType.numberWithOptions(decimal: true),
                             decoration: InputDecoration(
                               counterText: '',
                               contentPadding: const EdgeInsets.symmetric(
@@ -284,7 +283,15 @@ class _CadastroGastoState extends State<CadastroGasto> {
                           ),
                         ],
                       ),
-
+                      Container(
+                        height: 40,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/logo.png'),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -296,4 +303,3 @@ class _CadastroGastoState extends State<CadastroGasto> {
     );
   }
 }
-

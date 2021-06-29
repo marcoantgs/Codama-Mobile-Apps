@@ -4,6 +4,7 @@ import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class GastoLista extends StatefulWidget {
   final List<Gasto> gastos;
@@ -180,7 +181,7 @@ class _GastoLista extends State<GastoLista> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
-                width: 56,
+                width: 46,
               ),
               gastos.isEmpty
                   ? Container(
@@ -207,9 +208,9 @@ class _GastoLista extends State<GastoLista> {
                           Container(
                             padding: EdgeInsets.only(right: 3),
                             child: Icon(
-                              Icons.calculate_outlined,
+                              MdiIcons.calculator,
                               color: Colors.white,
-                              size: 26.0,
+                              size: 40.0,
                             ),
                           ),
                           Text(

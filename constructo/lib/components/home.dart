@@ -16,7 +16,7 @@ class _HomeConstructo extends State<HomeConstructo> {
   void initState() {
     super.initState();
 
-    //Carregando imagem ao iniciar primeira tela
+    //Carregando imagem ao iniciar tela home
     imagem = AssetImage('assets/images/imagem-fundo1.jpg');
 
     OperacoesComodo().getComodos().then((lista) {

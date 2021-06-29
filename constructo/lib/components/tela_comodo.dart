@@ -5,20 +5,17 @@ import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
 import 'package:ext_storage/ext_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pdf/pdf.dart';
 
 import 'package:pdf/widgets.dart' as pw;
 import 'package:permission_handler/permission_handler.dart';
 
 class TelaComodo extends StatefulWidget {
+  final comodo;
+  TelaComodo(this.comodo);
   @override
   _TelaComodo createState() => _TelaComodo();
-
-  final comodo;
-
-  final pdf = pw.Document();
-
-  TelaComodo(this.comodo);
 }
 
 class _TelaComodo extends State<TelaComodo> {
@@ -61,6 +58,31 @@ class _TelaComodo extends State<TelaComodo> {
         Navigator.popAndPushNamed(context, '/sobre');
       });
     }
+  }
+
+  _mensagemSucessoPDF(File file) {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: Text('Mensagem'),
+        content: Text(
+            'Seu PDF foi criado e salvo na pasta de downloads, deseja visualizá-lo ?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              setState(() {
+                Navigator.popAndPushNamed(context, '/verPDF', arguments: file);
+              });
+            },
+            child: const Text('Sim'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Não'),
+            child: const Text('Não'),
+          ),
+        ],
+      ),
+    );
   }
 
   _textoTituloPDF() {
@@ -166,18 +188,22 @@ class _TelaComodo extends State<TelaComodo> {
     );
 
     //Se não tiver a permisssão de "Armazenar arquivos" pede para dar essa permissão
-    //caso permita salva o arquivo
-    //Ou se já tiver a permissão salva o arquivo
+    //caso permita salva o arquivo e apresenta uma mensagem
+    //Ou se já tiver a permissão salva o arquivo e apresenta uma mensagem
     if (!status.isGranted) {
       await Permission.storage.request().then((value) async {
         if (value.isGranted) {
           File file = File("$pathDownloads/$nomePDF.pdf");
-          await file.writeAsBytes(await pdf.save());
+          await file.writeAsBytes(await pdf.save()).then((value) {
+            _mensagemSucessoPDF(value);
+          });
         }
       });
     } else {
       File file = File("$pathDownloads/$nomePDF.pdf");
-      await file.writeAsBytes(await pdf.save());
+      await file.writeAsBytes(await pdf.save()).then((value) {
+        _mensagemSucessoPDF(value);
+      });
     }
   }
 
@@ -207,7 +233,11 @@ class _TelaComodo extends State<TelaComodo> {
               alignment: Alignment.bottomRight,
               child: FloatingActionButton(
                 heroTag: 'btPDF',
-                child: Icon(Icons.picture_as_pdf_outlined, size: 50),
+                child: Icon(
+                  //Icons.picture_as_pdf_outlined,
+                  MdiIcons.pdfBox,
+                  size: 50,
+                ),
                 backgroundColor: Color.fromARGB(255, 72, 34, 16),
                 foregroundColor: Colors.white,
                 onPressed: () {
@@ -217,18 +247,18 @@ class _TelaComodo extends State<TelaComodo> {
                     showDialog<String>(
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
-                          title: Text('Aviso'),
-                          content: Text('Seu cômodo não tem nenhum gasto'),
-                          actions: [
-                            FlatButton(
-                              child: Text("Ok"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            ),
-                          ]),
+                        title: Text('Aviso'),
+                        content: Text('Seu cômodo não tem nenhum gasto'),
+                        actions: [
+                          FlatButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
                     );
-                    return;
                   }
                 },
               ),

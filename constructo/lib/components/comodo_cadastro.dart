@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class CadastroComodo extends StatefulWidget {
   final Comodo comodo;
-
   CadastroComodo(this.comodo);
 
   @override

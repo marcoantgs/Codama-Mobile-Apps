@@ -31,8 +31,10 @@ dependencies:
   flutter_native_splash: 
   dropdownfield: ^1.0.3
   pdf: 
+  advance_pdf_viewer:
+  share_extend:
   auto_size_text:
-  
+  material_design_icons_flutter:
 
 flutter_native_splash:
  color: "#482210"

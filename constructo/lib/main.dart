@@ -5,6 +5,8 @@ import 'package:constructo/components/sobre.dart';
 import 'package:constructo/components/tela_comodo.dart';
 import 'package:flutter/material.dart';
 
+import 'components/tela_verPDF.dart';
+
 void main() {
   runApp(MaterialApp(
       theme: ThemeData(
@@ -28,6 +30,9 @@ void main() {
           case '/adicionarGasto':
             return MaterialPageRoute(
                 builder: (context) => CadastroGasto(arguments));
+          case '/verPDF':
+            return MaterialPageRoute(
+                builder: (context) => TelaVerPDF(arguments));
           default:
             return null;
         }
