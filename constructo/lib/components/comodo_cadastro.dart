@@ -122,6 +122,7 @@ class _CadastroComodoState extends State<CadastroComodo> {
 
   _btCancelar() {
     Navigator.popAndPushNamed(context, '/home');
+    //Navigator.pop(context);
   }
 
   @override

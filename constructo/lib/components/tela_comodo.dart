@@ -20,10 +20,14 @@ class TelaComodo extends StatefulWidget {
 
 class _TelaComodo extends State<TelaComodo> {
   List<Gasto> gastos = List<Gasto>();
+  ImageProvider imagem;
 
   @override
   void initState() {
     super.initState();
+
+    //Carregando imagem ao iniciar a tela do cômodo
+    imagem = AssetImage('assets/images/imagem-fundo2.jpg');
 
     OperacoesGasto().getGastos(widget.comodo).then((lista) {
       setState(() {
@@ -42,12 +46,19 @@ class _TelaComodo extends State<TelaComodo> {
     });
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(imagem, context);
+  }
+
   final List<Gasto> _listaGasto = [];
 
   _trocaDeTela(int index) {
     if (index == 0) {
       setState(() {
         Navigator.popAndPushNamed(context, '/home');
+        Navigator.pop(context);
       });
     } else if (index == 1) {
       setState(() {

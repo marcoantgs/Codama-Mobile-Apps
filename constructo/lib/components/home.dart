@@ -47,6 +47,8 @@ class _HomeConstructo extends State<HomeConstructo> {
     if (index == 1) {
       setState(() {
         Navigator.popAndPushNamed(context, '/adicionarComodo');
+        /*Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CadastroComodo(null)));*/
       });
     } else if (index == 2) {
       setState(() {

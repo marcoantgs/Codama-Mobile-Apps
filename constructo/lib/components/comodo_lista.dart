@@ -10,21 +10,6 @@ class ComodoLista extends StatefulWidget {
 }
 
 class _ComodoLista extends State<ComodoLista> {
-  ImageProvider imagem;
-  @override
-  void initState() {
-    super.initState();
-
-    //Carregando imagem ao iniciar a tela do cômodo
-    imagem = AssetImage('assets/images/imagem-fundo2.jpg');
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    precacheImage(imagem, context);
-  }
-
   @override
   Widget build(BuildContext context) {
     double alturaTela = MediaQuery.of(context).size.height;

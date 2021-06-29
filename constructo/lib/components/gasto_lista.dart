@@ -181,7 +181,7 @@ class _GastoLista extends State<GastoLista> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Container(
-                width: 46,
+                width: 56,
               ),
               gastos.isEmpty
                   ? Container(
