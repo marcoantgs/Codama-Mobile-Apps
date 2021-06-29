@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:constructo/models/argumentos.dart';
 import 'package:constructo/models/gasto.dart';
 import 'package:constructo/utils/OperacoesGasto.dart';
@@ -140,79 +141,167 @@ class _CadastroGastoState extends State<CadastroGasto> {
         arguments: widget.args.comodo);
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              color: Color.fromARGB(255, 72, 34, 16),
-              height: 130,
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  "Cadastro de gastos",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/imagem-fundo2.jpg'),
+              fit: BoxFit.cover),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                child: Container(
+                  height: 500,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Container(
+                        height: 60,
+                        child: Center(
+                          child: AutoSizeText(
+                            "Cadastro de gastos",
+                            maxFontSize: 96,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              'Título:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            alignment: Alignment.bottomLeft,
+                          ),
+                          TextField(
+                            textAlign: TextAlign.center,
+                            maxLength: 20,
+                            controller: tituloController,
+                            decoration: InputDecoration(
+                              counterText: '',
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 15.0, horizontal: 20.0),
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(),
+                              hintText: 'Insira o título do gasto',
+                              hintStyle: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            child: Text(
+                              'Valor:',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            alignment: Alignment.bottomLeft,
+                          ),
+                          TextField(
+                            textAlign: TextAlign.center,
+                            maxLength: 20,
+                            controller: valorController,
+                            keyboardType: TextInputType.numberWithOptions(decimal: true),
+                            decoration: InputDecoration(
+                              counterText: '',
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 15.0, horizontal: 20.0),
+                              fillColor: Colors.white,
+                              filled: true,
+                              border: OutlineInputBorder(),
+                              hintText: 'Insira o valor do gasto',
+                              hintStyle: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.all(5.0),
+                            height: 55,
+                            width: 400,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Color.fromARGB(
+                                      255, 72, 34, 16), // background
+                                  onPrimary: Colors.white, // foreground
+                                ),
+                                child: editando == true
+                                    ? Text(
+                                        'Salvar gasto',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Adicionar gasto',
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                onPressed: _btCadastrar),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5.0),
+                            height: 55,
+                            width: 400,
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.black, // background
+                                  onPrimary: Colors.white, // foreground
+                                ),
+                                child: Text(
+                                  'Cancelar',
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                onPressed: _btCancelar),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        height: 40,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/logo.png'),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ),
-            Card(
-              elevation: 5,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      controller: tituloController,
-                      decoration: InputDecoration(labelText: 'Título'),
-                    ),
-                    TextField(
-                      controller: valorController,
-                      decoration: InputDecoration(labelText: 'Valor'),
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10.0),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(5.0),
-                      margin: const EdgeInsets.only(top: 20.0),
-                      height: 45,
-                      width: 400,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary:
-                                Color.fromARGB(255, 72, 34, 16), // background
-                            onPrimary: Colors.white, // foreground
-                          ),
-                          child: editando == true
-                              ? Text('Salvar gasto')
-                              : Text('Adicionar gasto'),
-                          onPressed: _btCadastrar),
-                    ),
-                    Container(
-                        padding: const EdgeInsets.all(5.0),
-                        height: 45,
-                        width: 400,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.brown[50], // background
-                              onPrimary: Colors.black, // foreground
-                            ),
-                            child: Text('Cancelar'),
-                            onPressed: _btCancelar)),
-                  ],
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
