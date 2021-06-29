@@ -237,7 +237,26 @@ class _TelaComodo extends State<TelaComodo> {
           ],
         ),
       ),
-
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Color.fromARGB(255, 72, 34, 16),
+        iconSize: 40,
+        selectedFontSize: 15,
+        unselectedFontSize: 15,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined), label: 'Cômodo'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline), label: 'Sobre'),
+        ],
+        onTap: (index) {
+          _trocaDeTela(index);
+        },
+      ),
     );
   }
 }
