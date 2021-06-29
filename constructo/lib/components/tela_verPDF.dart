@@ -41,7 +41,7 @@ class _TelaVerPDFState extends State<TelaVerPDF> {
             )
           : PDFViewer(document: _doc),
       appBar: AppBar(
-        title: Text('Flutter PDF'),
+        title: Text('PDF do cômodo'),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),

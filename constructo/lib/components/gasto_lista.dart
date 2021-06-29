@@ -220,7 +220,7 @@ class _GastoLista extends State<GastoLista> {
                       child: Row(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(right: 3),
+                            padding: EdgeInsets.only(right: 1),
                             child: Icon(
                               MdiIcons.calculator,
                               color: Colors.white,

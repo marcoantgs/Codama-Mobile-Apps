@@ -141,7 +141,7 @@ class _ComodoLista extends State<ComodoLista> {
                                           AlertDialog(
                                         title: const Text('Confirmação'),
                                         content: Text(
-                                            'Deseja excluir o cômodo: ${comodos[index].titulo} ?'),
+                                            'Deseja excluir o cômodo: ${comodos[index].titulo}?'),
                                         actions: <Widget>[
                                           TextButton(
                                             onPressed: () {

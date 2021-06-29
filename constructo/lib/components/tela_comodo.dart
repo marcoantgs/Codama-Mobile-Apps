@@ -72,7 +72,7 @@ class _TelaComodo extends State<TelaComodo> {
       builder: (BuildContext context) => AlertDialog(
         title: Text('Mensagem'),
         content: Text(
-            'Seu PDF foi criado e salvo na pasta de downloads, deseja visualizá-lo ?'),
+            'Seu PDF foi criado e salvo na pasta de downloads, deseja visualizá-lo?'),
         actions: <Widget>[
           TextButton(
             onPressed: () {
