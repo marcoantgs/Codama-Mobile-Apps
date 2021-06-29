@@ -6,6 +6,15 @@ class Sobre extends StatefulWidget {
 }
 
 class _SobreState extends State<Sobre> {
+  ImageProvider imagem;
+
+  @override
+  void initState() {
+    super.initState();
+    //Carregando imagem ao iniciar a tela sobre
+    imagem = AssetImage('assets/images/imagem-fundo1.jpg');
+  }
+
   _trocaDeTela(int index) {
     if (index == 0) {
       setState(() {
@@ -13,7 +22,9 @@ class _SobreState extends State<Sobre> {
       });
     } else if (index == 1) {
       setState(() {
-        Navigator.popAndPushNamed(context, '/adicionarComodo');
+        precacheImage(imagem, context).then((value) {
+          Navigator.popAndPushNamed(context, '/adicionarComodo');
+        });
       });
     }
   }

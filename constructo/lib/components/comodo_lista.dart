@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,14 @@ class ComodoLista extends StatefulWidget {
 }
 
 class _ComodoLista extends State<ComodoLista> {
+  ImageProvider imagem;
+
+  void initState() {
+    super.initState();
+    //Carregando imagem
+    imagem = AssetImage('assets/images/imagem-fundo1.jpg');
+  }
+
   @override
   Widget build(BuildContext context) {
     double alturaTela = MediaQuery.of(context).size.height;
@@ -46,13 +55,12 @@ class _ComodoLista extends State<ComodoLista> {
                             width: 90,
                             height: 60,
                             child: Center(
-                              child: Text(
-                                "Total gasto: \n" +
-                                    "R\$ " +
-                                    co.valorTotal.toString(),
+                              child: AutoSizeText(
+                                "Total gasto: \n" + "R\$ ${co.valorTotal}",
+                                maxLines: 2,
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 15,
+                                  fontSize: 12,
                                 ),
                               ),
                             ),
@@ -104,9 +112,12 @@ class _ComodoLista extends State<ComodoLista> {
                                 child: GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      Navigator.popAndPushNamed(
-                                          context, '/adicionarComodo',
-                                          arguments: comodos[index]);
+                                      precacheImage(imagem, context)
+                                          .then((value) {
+                                        Navigator.popAndPushNamed(
+                                            context, '/adicionarComodo',
+                                            arguments: comodos[index]);
+                                      });
                                     });
                                   },
                                   child: Icon(

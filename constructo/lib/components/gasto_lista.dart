@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:constructo/models/argumentos.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/models/gasto.dart';
@@ -15,6 +16,15 @@ class GastoLista extends StatefulWidget {
 }
 
 class _GastoLista extends State<GastoLista> {
+  ImageProvider imagem;
+
+  @override
+  void initState() {
+    super.initState();
+    //Carregando imagem
+    imagem = AssetImage('assets/images/imagem-fundo2.jpg');
+  }
+
   _valorTotal() {
     double valorTotal = 0.0;
     String mensagem = '';
@@ -128,11 +138,14 @@ class _GastoLista extends State<GastoLista> {
                                         child: GestureDetector(
                                           onTap: () {
                                             setState(() {
-                                              Navigator.popAndPushNamed(
-                                                  context, '/adicionarGasto',
-                                                  arguments: Argumentos(
-                                                      widget.comodo,
-                                                      gastos[index]));
+                                              precacheImage(imagem, context)
+                                                  .then((value) {
+                                                Navigator.popAndPushNamed(
+                                                    context, '/adicionarGasto',
+                                                    arguments: Argumentos(
+                                                        widget.comodo,
+                                                        gastos[index]));
+                                              });
                                             });
                                           },
                                           child: Icon(
@@ -162,8 +175,9 @@ class _GastoLista extends State<GastoLista> {
                               width: 100,
                               height: 60,
                               child: Center(
-                                child: Text(
-                                  "Valor: \n" + "R\$ " + ga.valor.toString(),
+                                child: AutoSizeText(
+                                  "Valor: \n" + "R\$ ${ga.valor}",
+                                  maxLines: 2,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
@@ -213,11 +227,11 @@ class _GastoLista extends State<GastoLista> {
                               size: 40.0,
                             ),
                           ),
-                          Text(
+                          AutoSizeText(
                             "Valor total = R\$ ${_valorTotal()}",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 14,
                             ),
                           ),
                         ],
@@ -232,8 +246,10 @@ class _GastoLista extends State<GastoLista> {
                   foregroundColor: Colors.white,
                   onPressed: () {
                     setState(() {
-                      Navigator.popAndPushNamed(context, '/adicionarGasto',
-                          arguments: Argumentos(widget.comodo, null));
+                      precacheImage(imagem, context).then((value) {
+                        Navigator.popAndPushNamed(context, '/adicionarGasto',
+                            arguments: Argumentos(widget.comodo, null));
+                      });
                     });
                   },
                 ),

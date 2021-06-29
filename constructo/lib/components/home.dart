@@ -16,7 +16,7 @@ class _HomeConstructo extends State<HomeConstructo> {
   void initState() {
     super.initState();
 
-    //Carregando imagem ao iniciar tela home
+    //Carregando imagem
     imagem = AssetImage('assets/images/imagem-fundo1.jpg');
 
     OperacoesComodo().getComodos().then((lista) {
@@ -35,20 +35,14 @@ class _HomeConstructo extends State<HomeConstructo> {
     });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    precacheImage(imagem, context);
-  }
-
   final List<Comodo> _listaComodos = [];
 
   _trocaDeTela(int index) {
     if (index == 1) {
       setState(() {
-        Navigator.popAndPushNamed(context, '/adicionarComodo');
-        /*Navigator.push(context,
-            MaterialPageRoute(builder: (context) => CadastroComodo(null)));*/
+        precacheImage(imagem, context).then((value) {
+          Navigator.popAndPushNamed(context, '/adicionarComodo');
+        });
       });
     } else if (index == 2) {
       setState(() {
