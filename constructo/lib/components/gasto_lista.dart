@@ -226,7 +226,7 @@ class _GastoLista extends State<GastoLista> {
               Container(
                 padding: EdgeInsets.only(right: 5),
                 child: FloatingActionButton(
-                  heroTag: 'btAddGasto',
+                  tooltip: 'Adicionar gasto',
                   child: Icon(Icons.add),
                   backgroundColor: Color.fromARGB(255, 72, 34, 16),
                   foregroundColor: Colors.white,

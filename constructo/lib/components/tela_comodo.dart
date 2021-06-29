@@ -231,7 +231,39 @@ class _TelaComodo extends State<TelaComodo> {
               height: 50,
               width: double.infinity,
               alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
+              child: IconButton(
+                tooltip: 'Criar PDF',
+                padding: EdgeInsets.only(right: 5, bottom: 5),
+                color: Color.fromARGB(255, 72, 34, 16),
+                icon: Icon(
+                  //Icons.picture_as_pdf_outlined,
+                  MdiIcons.pdfBox,
+                  color: Colors.white,
+                  size: 50,
+                ),
+                onPressed: () {
+                  if (_listaGasto.isNotEmpty) {
+                    _enviandoPDF();
+                  } else {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: Text('Aviso'),
+                        content: Text('Seu cômodo não tem nenhum gasto'),
+                        actions: [
+                          FlatButton(
+                            child: Text("Ok"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
+              /*FloatingActionButton(
                 heroTag: 'btPDF',
                 child: Icon(
                   //Icons.picture_as_pdf_outlined,
@@ -261,7 +293,7 @@ class _TelaComodo extends State<TelaComodo> {
                     );
                   }
                 },
-              ),
+              ),*/
             ),
             GastoLista(_listaGasto, widget.comodo),
           ],
@@ -277,11 +309,20 @@ class _TelaComodo extends State<TelaComodo> {
         unselectedItemColor: Colors.white,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'Home'),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+            tooltip: 'Tela principal',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined), label: 'Cômodo'),
+            icon: Icon(Icons.add_box_outlined),
+            label: 'Cômodo',
+            tooltip: 'Adicionar cômodo',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline), label: 'Sobre'),
+            icon: Icon(Icons.info_outline),
+            label: 'Sobre',
+            tooltip: 'Tela sobre o Aplicativo',
+          ),
         ],
         onTap: (index) {
           _trocaDeTela(index);

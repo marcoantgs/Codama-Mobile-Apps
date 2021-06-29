@@ -89,11 +89,20 @@ class _HomeConstructo extends State<HomeConstructo> {
         unselectedItemColor: Colors.white,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined), label: 'Home'),
+            icon: Icon(Icons.home_outlined),
+            label: 'Home',
+            tooltip: 'Tela principal',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.add_box_outlined), label: 'Cômodo'),
+            icon: Icon(Icons.add_box_outlined),
+            label: 'Cômodo',
+            tooltip: 'Adicionar cômodo',
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.info_outline), label: 'Sobre'),
+            icon: Icon(Icons.info_outline),
+            label: 'Sobre',
+            tooltip: 'Tela sobre o Aplicativo',
+          ),
         ],
         onTap: (index) {
           _trocaDeTela(index);
