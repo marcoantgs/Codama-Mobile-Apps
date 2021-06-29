@@ -58,7 +58,7 @@ class _TelaComodo extends State<TelaComodo> {
     if (index == 0) {
       setState(() {
         Navigator.popAndPushNamed(context, '/home');
-        Navigator.pop(context);
+        //Navigator.pop(context);
       });
     } else if (index == 1) {
       setState(() {
