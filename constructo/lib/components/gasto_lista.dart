@@ -83,7 +83,7 @@ class _GastoLista extends State<GastoLista> {
                                                 title:
                                                     const Text('Confirmação'),
                                                 content: Text(
-                                                    'Deseja excluir o gasto: ${gastos[index].titulo} ?'),
+                                                    'Deseja excluir o gasto: ${gastos[index].titulo}?'),
                                                 actions: <Widget>[
                                                   TextButton(
                                                     onPressed: () {
@@ -202,12 +202,24 @@ class _GastoLista extends State<GastoLista> {
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.7),
                       ),
-                      child: Text(
-                        "Valor total = R\$ ${_valorTotal()}",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                        ),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(right: 3),
+                            child: Icon(
+                              Icons.calculate_outlined,
+                              color: Colors.white,
+                              size: 26.0,
+                            ),
+                          ),
+                          Text(
+                            "Valor total = R\$ ${_valorTotal()}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
               Container(
