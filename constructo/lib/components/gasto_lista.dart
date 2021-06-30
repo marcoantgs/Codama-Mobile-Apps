@@ -206,6 +206,7 @@ class _GastoLista extends State<GastoLista> {
             children: <Widget>[
               gastos.isEmpty
                   ? Container(
+                      margin: EdgeInsets.only(right: 15),
                       alignment: Alignment.center,
                       height: 56,
                       child: Text(
