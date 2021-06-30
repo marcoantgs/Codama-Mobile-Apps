@@ -38,6 +38,7 @@ dependencies:
 
 
 
+
 flutter_icons:
   image_path: assets/icon/icone.png 
   android: true
