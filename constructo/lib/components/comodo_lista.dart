@@ -69,7 +69,7 @@ class _ComodoLista extends State<ComodoLista> {
                         Container(
                           color: Colors.black,
                           width: 110,
-                          height: 60,
+                          height: 90,
                           child: Column(
                             children: <Widget>[
                               Row(
@@ -88,18 +88,34 @@ class _ComodoLista extends State<ComodoLista> {
                                     child: Text(
                                       co.tipoComodo,
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: 11),
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
                               Container(
-                                child: AutoSizeText(
-                                  "Total gasto: \n" + "R\$ ${co.valorTotal}",
-                                  maxLines: 2,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
+                                child: Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(
+                                        "Total gasto:",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                      AutoSizeText(
+                                        "R\$ ${co.valorTotal}",
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -107,29 +123,36 @@ class _ComodoLista extends State<ComodoLista> {
                           ),
                         ),
                         Expanded(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  co.titulo,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.bold),
+                          child: Container(
+                            margin: EdgeInsets.only(left: 4),
+                            height: 90,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(top: 4, bottom: 15),
+                                  alignment: Alignment.topLeft,
+                                  child: AutoSizeText(
+                                    co.titulo,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  co.descricao,
-                                  style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: AutoSizeText(
+                                    co.descricao,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Row(

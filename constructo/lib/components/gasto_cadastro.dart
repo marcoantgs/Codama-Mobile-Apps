@@ -225,7 +225,7 @@ class _CadastroGastoState extends State<CadastroGasto> {
                             ),
                             TextField(
                               textAlign: TextAlign.center,
-                              maxLength: 8,
+                              maxLength: 10,
                               controller: valorController,
                               keyboardType: TextInputType.numberWithOptions(
                                   decimal: true),

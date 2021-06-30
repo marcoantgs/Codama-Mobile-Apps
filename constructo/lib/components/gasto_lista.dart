@@ -172,15 +172,25 @@ class _GastoLista extends State<GastoLista> {
                             color: Colors.black,
                             width: 110,
                             height: 60,
-                            child: Center(
-                              child: AutoSizeText(
-                                "Valor: \n" + "R\$ ${ga.valor}",
-                                maxLines: 2,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  "Valor:",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
+                                AutoSizeText(
+                                  "R\$ ${ga.valor}",
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -192,11 +202,8 @@ class _GastoLista extends State<GastoLista> {
         Container(
           padding: EdgeInsets.all(8),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Container(
-                width: 56,
-              ),
               gastos.isEmpty
                   ? Container(
                       alignment: Alignment.center,
@@ -212,6 +219,7 @@ class _GastoLista extends State<GastoLista> {
                     )
                   : Container(
                       padding: EdgeInsets.only(right: 6),
+                      margin: EdgeInsets.only(right: 4),
                       alignment: Alignment.center,
                       height: 56,
                       decoration: BoxDecoration(
@@ -239,7 +247,6 @@ class _GastoLista extends State<GastoLista> {
                       ),
                     ),
               Container(
-                padding: EdgeInsets.only(right: 5),
                 child: FloatingActionButton(
                   tooltip: 'Adicionar gasto',
                   child: Icon(Icons.add),

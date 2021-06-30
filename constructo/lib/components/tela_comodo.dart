@@ -231,7 +231,7 @@ class _TelaComodo extends State<TelaComodo> {
                 widget.comodo.titulo,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 20,
                 ),
               ),
             ),
