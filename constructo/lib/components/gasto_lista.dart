@@ -71,7 +71,7 @@ class _GastoLista extends State<GastoLista> {
                     itemBuilder: (ctx, index) {
                       final ga = gastos[index];
                       return Card(
-                        child: Row(
+                        child: Row( 
                           children: <Widget>[
                             Expanded(
                               child: Column(
@@ -155,19 +155,22 @@ class _GastoLista extends State<GastoLista> {
                                           ),
                                         ),
                                       ),
+                                      Container(
+                                        width: 200,
+                                        alignment: Alignment.center,
+                                      child: Text(
+                                        ga.titulo,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                     ],
                                   ),
-                                  Container(
-                                    width: 200,
-                                    padding: const EdgeInsets.only(bottom: 8),
-                                    child: Text(
-                                      ga.titulo,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
+
                                 ],
                               ),
                             ),
