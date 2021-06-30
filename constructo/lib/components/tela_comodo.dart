@@ -99,17 +99,6 @@ class _TelaComodo extends State<TelaComodo> {
     return tituloPdf;
   }
 
-  _textoGastosPDF() {
-    var gastoPdf = '';
-
-    for (var i = 0; i < _listaGasto.length; i++) {
-      gastoPdf += "${_listaGasto[i].titulo} = R\$ ${_listaGasto[i].valor}";
-      gastoPdf += '\n';
-    }
-
-    return gastoPdf;
-  }
-
   _textoValorTotalPDF() {
     var valortotalPdf = '';
 
@@ -131,65 +120,65 @@ class _TelaComodo extends State<TelaComodo> {
     //Criando nome do documento
     String nomePDF = "Constructo - " + widget.comodo.titulo;
 
-    //Criando a página PDF
     pdf.addPage(
-      pw.Page(
+      pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
-        build: (pw.Context context) {
-          return pw.Center(
-            child: pw.Column(
-              children: <pw.Widget>[
-                pw.Row(
-                  children: [
-                    pw.PdfLogo(),
-                    pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
+        build: (pw.Context context) => <pw.Widget>[
+          pw.PdfLogo(),
+          pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
+          pw.Text(
+            'Constructo',
+            style: pw.TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          pw.Header(
+            child: pw.Text(
+              _textoTituloPDF(),
+              style: pw.TextStyle(
+                fontSize: 20,
+                fontWeight: pw.FontWeight.bold,
+                color: PdfColors.white,
+              ),
+            ),
+            padding: pw.EdgeInsets.all(4),
+            margin: pw.EdgeInsets.only(top: 10, bottom: 10),
+            decoration: pw.BoxDecoration(color: PdfColor.fromHex('#482210')),
+          ),
+          pw.Header(
+            level: 1,
+            child: pw.Text(
+              _textoValorTotalPDF(),
+              style: pw.TextStyle(
+                fontSize: 20,
+                fontWeight: pw.FontWeight.bold,
+                color: PdfColors.white,
+              ),
+            ),
+            padding: pw.EdgeInsets.all(4),
+            decoration: pw.BoxDecoration(color: PdfColor.fromHex('#482210')),
+          ),
+          pw.Wrap(
+            children: List<pw.Widget>.generate(_listaGasto.length, (int index) {
+              final gasto = _listaGasto[index];
+              return pw.Container(
+                child: pw.Column(
+                  children: <pw.Widget>[
+                    pw.Header(
+                      text: "${gasto.titulo}",
+                      textStyle: pw.TextStyle(fontSize: 20),
+                    ),
                     pw.Text(
-                      'Constructo',
-                      style: pw.TextStyle(
-                        fontSize: 18,
-                      ),
+                      "Valor = R\$ ${gasto.valor}",
+                      textAlign: pw.TextAlign.left,
+                      style: pw.TextStyle(fontSize: 15),
                     ),
                   ],
                 ),
-                pw.Header(
-                  level: 0,
-                  child: pw.Text(
-                    _textoTituloPDF(),
-                    style: pw.TextStyle(
-                      fontSize: 20,
-                      fontWeight: pw.FontWeight.bold,
-                      color: PdfColors.white,
-                    ),
-                  ),
-                  padding: pw.EdgeInsets.all(4),
-                  margin: pw.EdgeInsets.only(top: 10, bottom: 10),
-                  decoration:
-                      pw.BoxDecoration(color: PdfColor.fromHex('#482210')),
-                ),
-                pw.Text(
-                  _textoGastosPDF(),
-                  style: pw.TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                pw.Header(
-                  level: 1,
-                  child: pw.Text(
-                    _textoValorTotalPDF(),
-                    style: pw.TextStyle(
-                      fontSize: 20,
-                      fontWeight: pw.FontWeight.bold,
-                      color: PdfColors.white,
-                    ),
-                  ),
-                  padding: pw.EdgeInsets.all(4),
-                  decoration:
-                      pw.BoxDecoration(color: PdfColor.fromHex('#482210')),
-                ),
-              ],
-            ),
-          );
-        },
+              );
+            }),
+          ),
+        ],
       ),
     );
 
