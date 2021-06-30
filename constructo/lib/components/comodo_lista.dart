@@ -94,10 +94,13 @@ class _ComodoLista extends State<ComodoLista> {
                                 ],
                               ),
                               Container(
-                                child: Text(
+                                child: AutoSizeText(
                                   "Total gasto: \n" + "R\$ ${co.valorTotal}",
+                                  maxLines: 2,
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
                                 ),
                               ),
                             ],

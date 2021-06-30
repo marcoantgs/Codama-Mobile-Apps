@@ -54,11 +54,13 @@ class _GastoLista extends State<GastoLista> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         gastos.isEmpty
-            ? Container(
-                width: 210,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/logo2.png'),
+            ? Expanded(
+                child: Container(
+                  width: 210,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/logo2.png'),
+                    ),
                   ),
                 ),
               )
@@ -209,7 +211,7 @@ class _GastoLista extends State<GastoLista> {
                       ),
                     )
                   : Container(
-                      padding: EdgeInsets.only(left: 15, right: 15),
+                      padding: EdgeInsets.only(right: 6),
                       alignment: Alignment.center,
                       height: 56,
                       decoration: BoxDecoration(
@@ -230,7 +232,7 @@ class _GastoLista extends State<GastoLista> {
                             "Valor total = R\$ ${_valorTotal()}",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 15,
+                              fontSize: 14,
                             ),
                           ),
                         ],
