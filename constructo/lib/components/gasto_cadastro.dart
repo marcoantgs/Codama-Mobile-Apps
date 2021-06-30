@@ -13,6 +13,7 @@ class CadastroGasto extends StatefulWidget {
 
 class _CadastroGastoState extends State<CadastroGasto> {
   bool editando;
+  bool voltar = false;
   List<Gasto> gastos = List<Gasto>();
 
   final tituloController = TextEditingController();
@@ -142,161 +143,166 @@ class _CadastroGastoState extends State<CadastroGasto> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/imagem-fundo2.jpg'),
-              fit: BoxFit.cover),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-                child: Container(
-                  height: 500,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Container(
-                        height: 60,
-                        child: Center(
-                          child: AutoSizeText(
-                            "Cadastro de gastos",
-                            maxFontSize: 96,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30,
+    return WillPopScope(
+      onWillPop: () async {
+        return voltar;
+      },
+      child: Scaffold(
+        body: Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/imagem-fundo2.jpg'),
+                fit: BoxFit.cover),
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 30.0, right: 30.0),
+                  child: Container(
+                    height: 500,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Container(
+                          height: 60,
+                          child: Center(
+                            child: AutoSizeText(
+                              "Cadastro de gastos",
+                              maxFontSize: 96,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                              'Título:',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                'Título:',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              alignment: Alignment.bottomLeft,
+                            ),
+                            TextField(
+                              textAlign: TextAlign.center,
+                              maxLength: 20,
+                              controller: tituloController,
+                              decoration: InputDecoration(
+                                counterText: '',
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15.0, horizontal: 20.0),
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(),
+                                hintText: 'Insira o título do gasto',
+                                hintStyle: TextStyle(fontSize: 15),
                               ),
                             ),
-                            alignment: Alignment.bottomLeft,
-                          ),
-                          TextField(
-                            textAlign: TextAlign.center,
-                            maxLength: 20,
-                            controller: tituloController,
-                            decoration: InputDecoration(
-                              counterText: '',
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 15.0, horizontal: 20.0),
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: OutlineInputBorder(),
-                              hintText: 'Insira o título do gasto',
-                              hintStyle: TextStyle(fontSize: 15),
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              child: Text(
+                                'Valor:',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                              alignment: Alignment.bottomLeft,
                             ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                              'Valor:',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                            TextField(
+                              textAlign: TextAlign.center,
+                              maxLength: 8,
+                              controller: valorController,
+                              keyboardType: TextInputType.numberWithOptions(
+                                  decimal: true),
+                              decoration: InputDecoration(
+                                counterText: '',
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15.0, horizontal: 20.0),
+                                fillColor: Colors.white,
+                                filled: true,
+                                border: OutlineInputBorder(),
+                                hintText: 'Insira o valor do gasto',
+                                hintStyle: TextStyle(fontSize: 15),
                               ),
                             ),
-                            alignment: Alignment.bottomLeft,
-                          ),
-                          TextField(
-                            textAlign: TextAlign.center,
-                            maxLength: 8,
-                            controller: valorController,
-                            keyboardType:
-                                TextInputType.numberWithOptions(decimal: true),
-                            decoration: InputDecoration(
-                              counterText: '',
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 15.0, horizontal: 20.0),
-                              fillColor: Colors.white,
-                              filled: true,
-                              border: OutlineInputBorder(),
-                              hintText: 'Insira o valor do gasto',
-                              hintStyle: TextStyle(fontSize: 15),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: <Widget>[
-                          Container(
-                            padding: const EdgeInsets.all(5.0),
-                            height: 55,
-                            width: 400,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Color.fromARGB(
-                                      255, 72, 34, 16), // background
-                                  onPrimary: Colors.white, // foreground
-                                ),
-                                child: editando == true
-                                    ? Text(
-                                        'Salvar gasto',
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                        ),
-                                      )
-                                    : Text(
-                                        'Adicionar gasto',
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                        ),
-                                      ),
-                                onPressed: _btCadastrar),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(5.0),
-                            height: 55,
-                            width: 400,
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  primary: Colors.black, // background
-                                  onPrimary: Colors.white, // foreground
-                                ),
-                                child: Text(
-                                  'Cancelar',
-                                  style: TextStyle(
-                                    fontSize: 17,
+                          ],
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              padding: const EdgeInsets.all(5.0),
+                              height: 55,
+                              width: 400,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Color.fromARGB(
+                                        255, 72, 34, 16), // background
+                                    onPrimary: Colors.white, // foreground
                                   ),
-                                ),
-                                onPressed: _btCancelar),
-                          ),
-                        ],
-                      ),
-                      Container(
-                        height: 40,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/logo.png'),
+                                  child: editando == true
+                                      ? Text(
+                                          'Salvar gasto',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                          ),
+                                        )
+                                      : Text(
+                                          'Adicionar gasto',
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                  onPressed: _btCadastrar),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5.0),
+                              height: 55,
+                              width: 400,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.black, // background
+                                    onPrimary: Colors.white, // foreground
+                                  ),
+                                  child: Text(
+                                    'Cancelar',
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                    ),
+                                  ),
+                                  onPressed: _btCancelar),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 40,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage('assets/images/logo.png'),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

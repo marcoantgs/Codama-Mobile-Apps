@@ -21,6 +21,7 @@ class TelaComodo extends StatefulWidget {
 class _TelaComodo extends State<TelaComodo> {
   List<Gasto> gastos = List<Gasto>();
   ImageProvider imagem;
+  bool voltar = false;
 
   @override
   void initState() {
@@ -52,7 +53,6 @@ class _TelaComodo extends State<TelaComodo> {
     if (index == 0) {
       setState(() {
         Navigator.popAndPushNamed(context, '/home');
-        //Navigator.pop(context);
       });
     } else if (index == 1) {
       setState(() {
@@ -215,9 +215,12 @@ class _TelaComodo extends State<TelaComodo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+    return WillPopScope(
+      onWillPop: () async {
+        return voltar;
+      },
+      child: Scaffold(
+        body: Column(
           children: <Widget>[
             Container(
               color: Color.fromARGB(255, 72, 34, 16),
@@ -242,7 +245,6 @@ class _TelaComodo extends State<TelaComodo> {
                 padding: EdgeInsets.only(right: 5, bottom: 5),
                 color: Color.fromARGB(255, 72, 34, 16),
                 icon: Icon(
-                  //Icons.picture_as_pdf_outlined,
                   MdiIcons.pdfBox,
                   color: Colors.white,
                   size: 50,
@@ -269,70 +271,41 @@ class _TelaComodo extends State<TelaComodo> {
                   }
                 },
               ),
-              /*FloatingActionButton(
-                heroTag: 'btPDF',
-                child: Icon(
-                  //Icons.picture_as_pdf_outlined,
-                  MdiIcons.pdfBox,
-                  size: 50,
-                ),
-                backgroundColor: Color.fromARGB(255, 72, 34, 16),
-                foregroundColor: Colors.white,
-                onPressed: () {
-                  if (_listaGasto.isNotEmpty) {
-                    _enviandoPDF();
-                  } else {
-                    showDialog<String>(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: Text('Aviso'),
-                        content: Text('Seu cômodo não tem nenhum gasto'),
-                        actions: [
-                          FlatButton(
-                            child: Text("Ok"),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                },
-              ),*/
             ),
-            GastoLista(_listaGasto, widget.comodo),
+            Expanded(
+              child: GastoLista(_listaGasto, widget.comodo),
+            ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color.fromARGB(255, 72, 34, 16),
-        iconSize: 40,
-        selectedFontSize: 15,
-        unselectedFontSize: 15,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-            tooltip: 'Tela principal',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_outlined),
-            label: 'Cômodo',
-            tooltip: 'Adicionar cômodo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info_outline),
-            label: 'Sobre',
-            tooltip: 'Tela sobre o Aplicativo',
-          ),
-        ],
-        onTap: (index) {
-          _trocaDeTela(index);
-        },
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color.fromARGB(255, 72, 34, 16),
+          iconSize: 40,
+          selectedFontSize: 15,
+          unselectedFontSize: 15,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
+              tooltip: 'Tela principal',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined),
+              label: 'Cômodo',
+              tooltip: 'Adicionar cômodo',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline),
+              label: 'Sobre',
+              tooltip: 'Tela sobre o Aplicativo',
+            ),
+          ],
+          onTap: (index) {
+            _trocaDeTela(index);
+          },
+        ),
       ),
     );
   }

@@ -11,6 +11,7 @@ class HomeConstructo extends StatefulWidget {
 class _HomeConstructo extends State<HomeConstructo> {
   ImageProvider imagem;
   List<Comodo> comodos = List<Comodo>();
+  bool voltar = false;
 
   @override
   void initState() {
@@ -53,9 +54,12 @@ class _HomeConstructo extends State<HomeConstructo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+    return WillPopScope(
+      onWillPop: () async {
+        return voltar;
+      },
+      child: Scaffold(
+        body: Column(
           children: <Widget>[
             Container(
               color: Color.fromARGB(255, 72, 34, 16),
@@ -71,38 +75,40 @@ class _HomeConstructo extends State<HomeConstructo> {
                 ),
               ),
             ),
-            ComodoLista(_listaComodos),
+            Expanded(
+              child: ComodoLista(_listaComodos),
+            ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Color.fromARGB(255, 72, 34, 16),
-        iconSize: 40,
-        selectedFontSize: 15,
-        unselectedFontSize: 15,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-            tooltip: 'Tela principal',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_outlined),
-            label: 'Cômodo',
-            tooltip: 'Adicionar cômodo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.info_outline),
-            label: 'Sobre',
-            tooltip: 'Tela sobre o Aplicativo',
-          ),
-        ],
-        onTap: (index) {
-          _trocaDeTela(index);
-        },
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color.fromARGB(255, 72, 34, 16),
+          iconSize: 40,
+          selectedFontSize: 15,
+          unselectedFontSize: 15,
+          selectedItemColor: Colors.white,
+          unselectedItemColor: Colors.white,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              label: 'Home',
+              tooltip: 'Tela principal',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_box_outlined),
+              label: 'Cômodo',
+              tooltip: 'Adicionar cômodo',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline),
+              label: 'Sobre',
+              tooltip: 'Tela sobre o Aplicativo',
+            ),
+          ],
+          onTap: (index) {
+            _trocaDeTela(index);
+          },
+        ),
       ),
     );
   }
