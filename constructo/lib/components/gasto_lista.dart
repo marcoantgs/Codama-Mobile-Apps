@@ -157,7 +157,8 @@ class _GastoLista extends State<GastoLista> {
                                       ),
                                     ],
                                   ),
-                                  Padding(
+                                  Container(
+                                    width: 200,
                                     padding: const EdgeInsets.only(bottom: 8),
                                     child: Text(
                                       ga.titulo,
