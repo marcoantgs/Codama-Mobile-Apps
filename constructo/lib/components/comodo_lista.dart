@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:constructo/models/comodo.dart';
 import 'package:constructo/utils/OperacoesComodo.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ComodoLista extends StatefulWidget {
   final List<Comodo> comodos;
@@ -19,6 +20,25 @@ class _ComodoLista extends State<ComodoLista> {
     imagem = AssetImage('assets/images/imagem-fundo1.jpg');
   }
 
+  IconData retornarIcone(tipoIcone) {
+    switch (tipoIcone) {
+      case 'Área de Serviços':
+        return MdiIcons.washingMachine;
+      case 'Banheiro':
+        return MdiIcons.shower;
+      case 'Cozinha':
+        return MdiIcons.fridgeOutline;
+      case 'Escritório':
+        return MdiIcons.desk;
+      case 'Oficina':
+        return MdiIcons.hammerWrench;
+      case 'Quarto':
+        return MdiIcons.hanger;
+      case 'Sala':
+        return MdiIcons.sofaSingleOutline;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double alturaTela = MediaQuery.of(context).size.height;
@@ -26,7 +46,7 @@ class _ComodoLista extends State<ComodoLista> {
     return Center(
       child: Container(
         //height: 435,
-        height: alturaTela * 0.6797,
+        height: alturaTela * 0.66,
         child: comodos.isEmpty
             ? Container(
                 width: 210,
@@ -52,17 +72,40 @@ class _ComodoLista extends State<ComodoLista> {
                         children: <Widget>[
                           Container(
                             color: Colors.black,
-                            width: 90,
+                            width: 110,
                             height: 60,
-                            child: Center(
-                              child: AutoSizeText(
-                                "Total gasto: \n" + "R\$ ${co.valorTotal}",
-                                maxLines: 2,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Icon(
+                                        retornarIcone(co.tipoComodo),
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.all(2),
+                                      padding:
+                                          EdgeInsets.only(top: 5, bottom: 3),
+                                      child: Text(
+                                        co.tipoComodo,
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 11),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),
+                                Container(
+                                  child: Text(
+                                    "Total gasto: \n" + "R\$ ${co.valorTotal}",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 12),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Expanded(
@@ -84,16 +127,6 @@ class _ComodoLista extends State<ComodoLista> {
                                     co.descricao,
                                     style: TextStyle(
                                         color: Colors.black54,
-                                        fontSize: 11,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Container(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    co.tipoComodo,
-                                    style: TextStyle(
-                                        color: Colors.grey,
                                         fontSize: 11,
                                         fontWeight: FontWeight.bold),
                                   ),
