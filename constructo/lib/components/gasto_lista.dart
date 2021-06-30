@@ -215,10 +215,11 @@ class _GastoLista extends State<GastoLista> {
                       ),
                     )
                   : Container(
-                      padding: EdgeInsets.only(left: 5, right: 5),
+                      padding: EdgeInsets.only(left: 15, right: 15),
                       alignment: Alignment.center,
                       height: 56,
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
                         color: Colors.black.withOpacity(0.7),
                       ),
                       child: Row(
