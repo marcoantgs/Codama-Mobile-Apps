@@ -79,7 +79,7 @@ class _GastoLista extends State<GastoLista> {
                                   Row(
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.only(right: 2),
+                                        margin: EdgeInsets.only(right: 4),
                                         decoration: BoxDecoration(
                                           color: Colors.red[400],
                                           border:
@@ -129,7 +129,7 @@ class _GastoLista extends State<GastoLista> {
                                         ),
                                       ),
                                       Container(
-                                        margin: EdgeInsets.only(right: 2),
+                                        margin: EdgeInsets.only(right: 4),
                                         decoration: BoxDecoration(
                                           color: Colors.grey[400],
                                           border:
@@ -156,13 +156,12 @@ class _GastoLista extends State<GastoLista> {
                                         ),
                                       ),
                                       Container(
-                                        width: 200,
+                                        width: 195,
                                         alignment: Alignment.center,
                                       child: Text(
                                         ga.titulo,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
-                                          
                                             color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold),
@@ -236,7 +235,7 @@ class _GastoLista extends State<GastoLista> {
                             "Valor total = R\$ ${_valorTotal()}",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 14,
+                              fontSize: 15,
                             ),
                           ),
                         ],
