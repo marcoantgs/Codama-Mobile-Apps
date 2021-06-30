@@ -124,13 +124,17 @@ class _TelaComodo extends State<TelaComodo> {
       pw.MultiPage(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) => <pw.Widget>[
-          pw.PdfLogo(),
-          pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
-          pw.Text(
-            'Constructo',
-            style: pw.TextStyle(
-              fontSize: 18,
-            ),
+          pw.Row(
+            children: <pw.Widget>[
+              pw.PdfLogo(),
+              pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
+              pw.Text(
+                'Constructo',
+                style: pw.TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            ],
           ),
           pw.Header(
             child: pw.Text(
