@@ -36,6 +36,14 @@ dependencies:
   auto_size_text:
   material_design_icons_flutter:
 
+
+
+flutter_icons:
+  image_path: assets/icon/icone.png 
+  android: true
+  ios: true
+
+
 flutter_native_splash:
  color: "#482210"
  image: assets/images/logo.png
@@ -46,10 +54,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/icon/icone.png"
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
