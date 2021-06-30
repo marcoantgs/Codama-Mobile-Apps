@@ -1,6 +1,8 @@
 # Codama-Mobile-Apps
 Projeto: Constructo
+
 Equipe: Codama; composta por Acley Filho, Arthur Ribeiro, Lucas de Sena e Marco Antonio Gonçalves
+
 Disciplina Mobile Apps - Semestre 2021/1
 
 ## Sobre o Constructo
