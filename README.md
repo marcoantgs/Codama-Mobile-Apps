@@ -1,5 +1,7 @@
 # Codama-Mobile-Apps
 Projeto: Constructo
+Equipe: Codama; composta por Acley Filho, Arthur Ribeiro, Lucas de Sena e Marco Antonio Gonçalves
+Disciplina Mobile Apps - Semestre 2021/1
 
 ## Sobre o Constructo
 A função principal da aplicação Constructo é auxiliar na organização do que está sendo realizado em cada cômodo de determinada construção e efetuar a contabilização das despesas ao longo do tempo.
